@@ -1,5 +1,5 @@
 ---
-import { site } from "@/data/site";
+import { site, nav } from "@/data/site";
 const year = new Date().getFullYear();
 ---
 
@@ -20,11 +20,10 @@ const year = new Date().getFullYear();
 
     <div class="mt-8 flex flex-col gap-3 border-t border-[var(--border-soft)] pt-6 text-sm text-[var(--text-faint)] sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {site.name}. All rights reserved.</p>
-      <div class="flex gap-5">
-        <a href="/" class="hover:text-[var(--text)]">Home</a>
-        <a href="/about" class="hover:text-[var(--text)]">About</a>
-        <a href="/blog" class="hover:text-[var(--text)]">Blog</a>
-        <a href="/contact" class="hover:text-[var(--text)]">Contact</a>
+      <div class="flex flex-wrap gap-5">
+        {nav.map((item) => (
+          <a href={item.href} class="hover:text-[var(--text)]">{item.label}</a>
+        ))}
       </div>
     </div>
   </div>
