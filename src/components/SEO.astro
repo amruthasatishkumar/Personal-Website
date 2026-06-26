@@ -1,0 +1,79 @@
+---
+import { site } from "@/data/site";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  tags?: string[];
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = site.tagline,
+  image = "/og-default.png",
+  type = "website",
+  publishedTime,
+  tags = [],
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title
+  ? `${title} | ${site.name}`
+  : `${site.name} | ${site.role} at ${site.company}`;
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: site.role,
+  worksFor: { "@type": "Organization", name: site.company },
+  url: site.url,
+  sameAs: [site.linkedin],
+  address: { "@type": "PostalAddress", addressLocality: site.location },
+};
+
+const articleSchema =
+  type === "article"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: title,
+        description,
+        image: ogImage,
+        datePublished: publishedTime,
+        author: { "@type": "Person", name: site.name, url: site.url },
+        keywords: tags.join(", "),
+        url: canonical,
+      }
+    : null;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={site.name} />
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+{articleSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+)}

@@ -1,0 +1,476 @@
+@import "tailwindcss";
+
+/*
+  Amrutha Satishkumar - personal brand site
+  Design system: dark-first glass / aurora, with a matching light theme.
+  Theme is toggled by adding/removing the `dark` class on <html>.
+*/
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Brand palette (aurora: violet -> indigo -> cyan) */
+  --color-aurora-1: #7c5cff;
+  --color-aurora-2: #4f7cff;
+  --color-aurora-3: #22d3ee;
+  --color-aurora-4: #c084fc;
+
+  /* Fonts */
+  --font-sans: "Sora Variable", "Sora", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-body: "Inter Variable", "Inter", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Easing + radius */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-glass: 1.25rem;
+}
+
+/*
+  Semantic tokens resolved per theme. Components read these via
+  var(--...) or the Tailwind utilities mapped below.
+*/
+:root {
+  color-scheme: dark;
+
+  /* Dark theme (default) */
+  --bg: #07080f;
+  --bg-soft: #0c0e1a;
+  --surface: 255 255 255; /* rgb channels for alpha mixing */
+  --text: #e8eaf3;
+  --text-muted: #9aa3bd;
+  --text-faint: #6b7392;
+  --border: 255 255 255;
+  --border-alpha: 0.08;
+  --accent: #8b6cff;
+  --accent-2: #22d3ee;
+  --ring: #7c5cff;
+
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-bg-strong: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.6);
+}
+
+:root.light {
+  color-scheme: light;
+
+  --bg: #f6f7fb;
+  --bg-soft: #ffffff;
+  --surface: 12 14 26;
+  --text: #14172a;
+  --text-muted: #4a5170;
+  --text-faint: #767d9a;
+  --border: 12 14 26;
+  --border-alpha: 0.1;
+  --accent: #5b3df5;
+  --accent-2: #0e9bb8;
+  --ring: #5b3df5;
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(20, 23, 42, 0.08);
+  --glass-shadow: 0 10px 40px -16px rgba(40, 50, 90, 0.25);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--border) / var(--border-alpha));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 35%, transparent);
+    color: var(--text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  /* Frosted glass card */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius-glass);
+  }
+
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius-glass);
+  }
+
+  /* Gradient text accent */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-aurora-4),
+      var(--color-aurora-1) 35%,
+      var(--color-aurora-2) 65%,
+      var(--color-aurora-3)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Pill / chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1;
+    border-radius: 999px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  button.chip {
+    cursor: pointer;
+    transition: color 0.2s var(--ease-smooth),
+      border-color 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth);
+  }
+  button.chip:hover {
+    color: var(--text);
+    border-color: color-mix(in oklab, var(--accent) 40%, var(--glass-border));
+  }
+  .chip.is-active {
+    color: #fff;
+    background: linear-gradient(
+      100deg,
+      var(--color-aurora-1),
+      var(--color-aurora-3)
+    );
+    border-color: transparent;
+  }
+
+  /* Form fields */
+  .form-input {
+    margin-top: 0.4rem;
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s var(--ease-smooth),
+      box-shadow 0.2s var(--ease-smooth);
+  }
+  .form-input::placeholder {
+    color: var(--text-faint);
+  }
+  .form-input:focus {
+    border-color: color-mix(in oklab, var(--accent) 55%, var(--glass-border));
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent);
+  }
+
+  .btn-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 999px;
+    color: #fff;
+    background: linear-gradient(
+      100deg,
+      var(--color-aurora-1),
+      var(--color-aurora-2) 55%,
+      var(--color-aurora-3)
+    );
+    box-shadow: 0 8px 24px -8px color-mix(in oklab, var(--accent) 70%, transparent);
+    transition: transform 0.25s var(--ease-smooth),
+      box-shadow 0.25s var(--ease-smooth), filter 0.25s var(--ease-smooth);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow: 0 14px 34px -8px color-mix(in oklab, var(--accent) 80%, transparent);
+  }
+
+  /* Ghost / glass button */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 999px;
+    color: var(--text);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    transition: transform 0.25s var(--ease-smooth),
+      border-color 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth);
+  }
+  .btn-ghost:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--accent) 50%, var(--glass-border));
+    background: var(--glass-bg);
+  }
+
+  /* Section heading eyebrow */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+}
+
+/* Aurora background blobs (fixed, behind content) */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.aurora::before {
+  top: -20vw;
+  left: -10vw;
+  background: radial-gradient(circle at center, var(--color-aurora-1), transparent 60%);
+  animation: drift1 24s var(--ease-smooth) infinite alternate;
+}
+.aurora::after {
+  bottom: -25vw;
+  right: -15vw;
+  background: radial-gradient(circle at center, var(--color-aurora-3), transparent 60%);
+  animation: drift2 28s var(--ease-smooth) infinite alternate;
+}
+:root.light .aurora::before,
+:root.light .aurora::after {
+  opacity: 0.3;
+}
+
+@keyframes drift1 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(8vw, 6vh) scale(1.15); }
+}
+@keyframes drift2 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-7vw, -5vh) scale(1.1); }
+}
+
+/* Scroll reveal. Elements only hide once JS marks them below the fold (.pre),
+   so above-the-fold content paints instantly with no flash. */
+.reveal {
+  transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+}
+.reveal.pre {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.reveal.pre.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .reveal.pre {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Article body typography */
+.prose-glass {
+  font-size: 1.075rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+.prose-glass > * + * {
+  margin-top: 1.25rem;
+}
+.prose-glass h2 {
+  font-family: var(--font-sans);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-top: 2.75rem;
+}
+.prose-glass h3 {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 2rem;
+}
+.prose-glass h4 {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 1.5rem;
+}
+.prose-glass p,
+.prose-glass ul,
+.prose-glass ol {
+  color: var(--text-muted);
+}
+.prose-glass strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.prose-glass a {
+  color: var(--accent-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+}
+.prose-glass a:hover {
+  text-decoration-color: var(--accent);
+}
+.prose-glass ul,
+.prose-glass ol {
+  padding-left: 1.4rem;
+}
+.prose-glass ul {
+  list-style: disc;
+}
+.prose-glass ol {
+  list-style: decimal;
+}
+.prose-glass li {
+  margin-top: 0.5rem;
+}
+.prose-glass li::marker {
+  color: var(--accent);
+}
+.prose-glass img {
+  border-radius: var(--radius-glass);
+  border: 1px solid var(--glass-border);
+  margin-block: 1.75rem;
+  width: 100%;
+}
+.prose-glass blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  font-style: italic;
+  color: var(--text);
+}
+.prose-glass code {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.4rem;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+}
+.prose-glass pre {
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-glass);
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  overflow-x: auto;
+}
+.prose-glass pre code {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.prose-glass hr {
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  margin-block: 2.5rem;
+}
+.prose-glass table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.prose-glass th,
+.prose-glass td {
+  border: 1px solid var(--glass-border);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+}
+.prose-glass th {
+  color: var(--text);
+  background: var(--glass-bg-strong);
+}
+
