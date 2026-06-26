@@ -13,7 +13,7 @@ export const site = {
   email: "amruthashetty299@gmail.com",
   linkedin: "https://www.linkedin.com/in/amruthasatishkumar",
   // Update this to your final domain before deploying.
-  url: "https://amruthasatishkumar.com",
+  url: "https://buildwithamrutha.com",
   // Web3Forms access key. Create a free key at https://web3forms.com and paste it here.
   web3formsKey: "d89f7345-31db-4f2c-9345-5f759ba895a9",
   // Local avatar (downloaded during migration). Falls back gracefully if missing.

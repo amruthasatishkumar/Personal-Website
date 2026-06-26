@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // Update `site` to your final custom domain before deploying.
 export default defineConfig({
-  site: "https://amruthasatishkumar.com",
+  site: "https://buildwithamrutha.com",
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

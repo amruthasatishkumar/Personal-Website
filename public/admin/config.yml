@@ -6,8 +6,8 @@ backend:
 media_folder: "public/images/blog"
 public_folder: "/images/blog"
 
-site_url: https://amruthasatishkumar.com
-display_url: https://amruthasatishkumar.com
+site_url: https://buildwithamrutha.com
+display_url: https://buildwithamrutha.com
 
 collections:
   - name: blog
