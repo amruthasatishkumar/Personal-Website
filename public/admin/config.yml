@@ -1,9 +1,9 @@
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  repo: amruthasatishkumar/Personal-Website
   branch: main
 
-media_folder: "site/public/images/blog"
+media_folder: "public/images/blog"
 public_folder: "/images/blog"
 
 site_url: https://amruthasatishkumar.com
