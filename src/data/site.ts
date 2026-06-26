@@ -32,9 +32,9 @@ export const quickFacts: string[] = [
 export const nav: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Blog", href: "/blog" },
+  { label: "Builds", href: "/builds" },
   { label: "About", href: "/about" },
   { label: "Experience", href: "/experience" },
-  { label: "Builds", href: "/builds" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -65,6 +65,7 @@ export const projects: Project[] = [
       "A self-development and journaling web app built to make reflection a daily habit, with space to track growth, mood, and intentions over time.",
     url: "https://self-chakra.vercel.app/",
     tags: ["Web App", "Journaling", "Self-development"],
+    note: "Work in progress, feel free to use it. Your data privacy is fully maintained.",
   },
 ];
 
