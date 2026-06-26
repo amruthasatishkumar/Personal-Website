@@ -45,6 +45,7 @@ export type Project = {
   description: string;
   url: string;
   tags: string[];
+  note?: string;
 };
 
 export const projects: Project[] = [
@@ -55,6 +56,7 @@ export const projects: Project[] = [
       "An interactive data lab that turns raw city data into clear, explorable insights. A hands-on playground for analytics, visualization, and finding the story inside urban patterns.",
     url: "https://amruthasatishkumar.github.io/urbanpulse-data-lab/",
     tags: ["Data Analytics", "Visualization", "Data Lab"],
+    note: "Built for Microsoft, can be run on your own tenant using the Data Setup instructions.",
   },
   {
     title: "Self Chakra",
