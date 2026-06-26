@@ -34,7 +34,36 @@ export const nav: { label: string; href: string }[] = [
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Experience", href: "/experience" },
+  { label: "Try It Out", href: "/try-it-out" },
   { label: "Contact", href: "/contact" },
+];
+
+// Live projects and experiments (Try It Out page).
+export type Project = {
+  title: string;
+  category: string;
+  description: string;
+  url: string;
+  tags: string[];
+};
+
+export const projects: Project[] = [
+  {
+    title: "UrbanPulse Data Lab",
+    category: "Data Lab",
+    description:
+      "An interactive data lab that turns raw city data into clear, explorable insights. A hands-on playground for analytics, visualization, and finding the story inside urban patterns.",
+    url: "https://amruthasatishkumar.github.io/urbanpulse-data-lab/",
+    tags: ["Data Analytics", "Visualization", "Data Lab"],
+  },
+  {
+    title: "Self Chakra",
+    category: "Web App",
+    description:
+      "A self-development and journaling web app built to make reflection a daily habit, with space to track growth, mood, and intentions over time.",
+    url: "https://self-chakra.vercel.app/",
+    tags: ["Web App", "Journaling", "Self-development"],
+  },
 ];
 
 export type FocusCard = { title: string; body: string };
