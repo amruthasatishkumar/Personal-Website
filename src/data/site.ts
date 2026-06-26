@@ -34,7 +34,7 @@ export const nav: { label: string; href: string }[] = [
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Experience", href: "/experience" },
-  { label: "Try It Out", href: "/try-it-out" },
+  { label: "Builds", href: "/builds" },
   { label: "Contact", href: "/contact" },
 ];
 
