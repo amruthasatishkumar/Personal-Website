@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-// Default theme is dark (no class). Light mode adds the `light` class to <html>.
+// Default theme is light (adds the `light` class to <html>). Dark mode removes it.
 function getInitial(): "dark" | "light" {
-  if (typeof document === "undefined") return "dark";
+  if (typeof document === "undefined") return "light";
   return document.documentElement.classList.contains("light") ? "light" : "dark";
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {
     setTheme(getInitial());
