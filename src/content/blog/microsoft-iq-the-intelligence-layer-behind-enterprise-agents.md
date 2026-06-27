@@ -10,8 +10,6 @@ featured: true
 draft: false
 ---
 
-![Microsoft IQ cover](/images/blog/microsoft-iq-the-intelligence-layer-behind-enterprise-agents/cover.png)
-
 ## The problem Microsoft IQ is solving
 
 Most teams building agents hit the same wall. The agent logic is ready, but the knowledge underneath it is scattered across documents, emails, meetings, operational systems, and the open web. Wiring all of that into an agent means solving for scale, security, freshness, and answer quality all at once, usually with a different custom integration for every source.
