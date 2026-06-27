@@ -77,8 +77,7 @@ const diagram = `
   <rect width="1200" height="760" fill="#07080f"/>
   <rect width="1200" height="760" fill="url(#glow1)"/>
   <rect width="1200" height="760" fill="url(#glow2)"/>
-  ${msLogo(80, 56, 40)}
-  <text x="132" y="88" fill="#e8eaf3" font-size="30" font-weight="700" font-family="Segoe UI, Arial, sans-serif">The Microsoft IQ family</text>
+  <text x="80" y="88" fill="#e8eaf3" font-size="30" font-weight="700" font-family="Segoe UI, Arial, sans-serif">The Microsoft IQ family</text>
   <text x="80" y="128" fill="#9aa3bd" font-size="18" font-family="Segoe UI, Arial, sans-serif">Knowledge sources feed a unified layer that grounds every agent.</text>
   ${card(80, 170, 245, 112, "Work IQ", "Emails, meetings, files, Teams", "#7c5cff")}
   ${card(345, 170, 245, 112, "Fabric IQ", "Ontology + data agents", "#4f7cff")}
