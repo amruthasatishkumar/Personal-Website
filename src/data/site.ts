@@ -11,7 +11,7 @@ export const site = {
     "I work across both sides of modern AI: the data platforms that make it possible, and the AI and agentic systems built on top, with governance and trust at the core.",
   location: "San Jose, California",
   email: "amruthashetty299@gmail.com",
-  linkedin: "https://www.linkedin.com/in/amruthasatishkumar",
+  linkedin: "https://www.linkedin.com/in/amrutha-satishkumar/",
   // Update this to your final domain before deploying.
   url: "https://buildwithamrutha.com",
   // Web3Forms access key. Create a free key at https://web3forms.com and paste it here.
