@@ -63,7 +63,7 @@ export const projects: Project[] = [
     category: "Web App",
     description:
       "A self-development and journaling web app built to make reflection a daily habit, with space to track growth, mood, and intentions over time.",
-    url: "https://self-chakra.vercel.app/",
+    url: "https://selfchakra.ruviz.app/",
     tags: ["Web App", "Journaling", "Self-development"],
     note: "Work in progress, feel free to use it. Your data privacy is fully maintained.",
   },
