@@ -53,3 +53,10 @@ AI raises the stakes on all of this. Agents and copilots are only as trustworthy
 The shift Purview represents is that data governance is moving from defense to enablement. For years it was a compliance chore, a way to avoid getting into trouble. The Unified Catalog reframes it as the layer that reunites a business with the data that fuels it: organized by domain, packaged as products, scored for quality, and available through self-service. As data estates keep growing and AI keeps reaching deeper into them, the organizations that treat governance as an accelerator, not a brake, are the ones whose data will actually be usable.
 
 If you run a data estate today, the question is no longer only "what data do we have?" It is "can the right person, or the right agent, find it, trust it, and use it safely?"
+
+## Sources
+
+This post is based on Microsoft's public documentation:
+
+- [Learn about Microsoft Purview Unified Catalog](https://learn.microsoft.com/en-us/purview/unified-catalog) (Microsoft Learn, governance domains, data products, quality, and health)
+- [Get started with data governance](https://learn.microsoft.com/en-us/purview/data-governance-get-started) (Microsoft Learn, setting up the Unified Catalog)
