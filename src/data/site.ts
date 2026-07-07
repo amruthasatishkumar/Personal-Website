@@ -96,7 +96,7 @@ export const stats: Stat[] = [
   { value: "7+", label: "Years across data & AI" },
   { value: "100+", label: "Enterprise customers" },
   { value: "35+", label: "Solutions shipped to production" },
-  { value: "5+", label: "Years on Azure data & AI" },
+  { value: "6", label: "Microsoft certifications" },
 ];
 
 // Personal principles (About page).
