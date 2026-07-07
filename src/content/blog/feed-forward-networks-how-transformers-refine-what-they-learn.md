@@ -1,9 +1,9 @@
 ---
 title: "Feed-Forward Networks: How Transformers Refine What They Learn"
-description: ""
+description: "The feed-forward network is the quiet workhorse inside every Transformer layer. Here is how it expands, adds nonlinearity, and refines what attention learns."
 pubDate: 2026-02-20
 category: "AI"
-tags: []
+tags: ["AI", "Transformers"]
 cover: "/images/blog/feed-forward-networks-how-transformers-refine-what-they-learn/cover.png"
 readTime: "3 min"
 featured: false

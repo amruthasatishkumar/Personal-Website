@@ -1,6 +1,6 @@
 ---
 title: "Attention Mechanism : The Secret Behind How Transformers Think"
-description: ""
+description: "How the attention mechanism lets a Transformer weigh every word against every other word to build context, explained with a simple queries, keys, and values analogy."
 pubDate: 2026-02-20
 category: "AI"
 tags: ["AI", "Transformers"]
@@ -47,8 +47,6 @@ Imagine you’re in a library.
     
 
 The attention mechanism matches the query with all the keys to find which books (words) are most relevant and then retrieves the corresponding values.
-
-Image from [Google.com](http://Google.com)
 
 Each word in a sentence acts as a _query_ to every other word computing similarity scores and weighting their influence accordingly. The result is an **attention matrix** showing how strongly each token “attends” to others.
 

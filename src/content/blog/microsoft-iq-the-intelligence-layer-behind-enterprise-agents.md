@@ -72,3 +72,10 @@ Build the knowledge once, reuse it across every agent.
 The pattern behind Microsoft IQ is bigger than any single product. As agents move from pilots to production, the differentiator stops being which model you picked and becomes how well your knowledge is organized, governed, and retrieved. Microsoft IQ is a bet that the knowledge layer, not the model, is where enterprise advantage will actually live.
 
 If you are designing agents today, start with the question Microsoft is implicitly asking: where does your company's IQ live, and can your agents reach it without breaking trust?
+
+## Sources
+
+This post is based on Microsoft's public announcements and documentation, where the product details and retrieval figures come from:
+
+- [Microsoft IQ documentation](https://learn.microsoft.com/en-us/microsoft-iq/) (Microsoft Learn, the enterprise intelligence layer and the Work IQ, Fabric IQ, Foundry IQ, and Web IQ family)
+- [What is Fabric IQ?](https://learn.microsoft.com/en-us/fabric/iq/overview) (Microsoft Learn, Fabric IQ within Microsoft IQ)

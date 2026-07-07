@@ -1,9 +1,9 @@
 ---
 title: "Real Time Event Streaming in Microsoft Fabric How It Works What You Need and How to Set It Up"
-description: "Learn how real time event streaming works in Microsoft Fabric including Event Streams Eventhouse KQL and Power BI along with a step by step setup guide for real"
+description: "Learn how real time event streaming works in Microsoft Fabric, including Event Streams, Eventhouse, KQL, and Power BI, with a step by step setup guide for real-time analytics."
 pubDate: 2026-03-18
 category: "Data & AI"
-tags: []
+tags: ["Data & AI", "Fabric", "Real-Time"]
 cover: "/images/blog/real-time-event-streaming-in-microsoft-fabric-how-it-works-what-you-need-and-how-to-set-it-up/cover.png"
 readTime: "4 min"
 featured: false
