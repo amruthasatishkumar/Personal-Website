@@ -5,7 +5,7 @@ pubDate: 2026-07-06
 category: "Data"
 tags: ["Data", "PowerBI", "Fabric", "Licensing"]
 cover: "/images/blog/from-p-to-f-migrating-power-bi-premium-to-fabric-capacity/cover.png"
-readTime: "6 min"
+readTime: "8 min"
 featured: true
 draft: false
 ---
@@ -57,15 +57,35 @@ If the switch were only a rename, this would be a chore. It is actually an upgra
 - **Azure only features.** Trusted workspace access, managed private endpoints, and Azure management surfaces are available on F SKUs and were never part of P.
 - **Embedded and Report Server included.** Power BI Embedded comes with F SKUs, and Power BI Report Server is included with F64 and higher reserved instances.
 
-## How to migrate without downtime
+## How to migrate, step by step
 
-The mechanics are simpler than the licensing:
+The mechanics are simpler than the licensing, but the effort depends entirely on your scenario.
 
-1. **Buy the F capacity** in Azure at your next renewal, sized from your metrics, with your Microsoft representative.
-2. **Reassign your workspaces** from the P capacity to the new F capacity in the admin portal. For large estates, Microsoft provides an automated migration tool so you are not moving thousands of workspaces by hand.
-3. **Delete the old P capacity** once everything is moved.
+**Start by picking your scenario. They are not equal.**
 
-Two things protect you during the cutover. You get a free Premium capacity for the first 30 days after your old subscription ends, matched to your previous P size, so you are not paying for two capacities at once. And you keep access to your Power BI data for 90 days while you transition. One operational note: when a workspace is reassigned, active jobs are cancelled and need a rerun, but scheduled jobs are not affected. Plan the switch for a quiet window and rerun anything in flight.
+- **Same tenant, same region.** The easy path. You reassign your workspaces to the new Fabric capacity in the admin portal. It is a billing change, not a rebuild, and it covers both Power BI and Fabric items. Most migrations are this.
+- **Same tenant, different region.** Doable for Power BI items, but large storage format semantic models do not move cross region automatically. You redeploy them or use backup and restore. Budget more time.
+- **Cross region with Fabric items, or cross tenant.** Not a simple reassignment. Fabric items do not move cross region natively, and nothing moves across tenants by assignment. These are recreate and redeploy projects, so treat them as real migrations rather than swaps.
+
+**Line up the prerequisites.**
+
+- Purchase the target Fabric capacity first, sized from your actual usage.
+- Assign the Fabric Administrator and Capacity Administrator roles to whoever runs the move.
+- For a reserved instance, confirm you have the Azure owner or reservation purchaser role on the subscription.
+- Check your Fabric capacity quota for that subscription and region, and request an increase if you are short.
+
+**Discover before you move.**
+
+- Inventory what is actually in the capacity. Old, unused reports are a chance to clean up rather than carry over.
+- Flag large semantic models and any Fabric items early, since they change the plan, especially cross region.
+- If there are no Fabric items, temporarily turning off Fabric features can speed things up.
+
+**Then move the workspaces, one of two ways.**
+
+- **Admin portal, manually.** Reassign each workspace to the new Fabric capacity, then delete the old P capacity once everything is moved. Best for a handful of workspaces.
+- **Automated notebook.** For many workspaces or multiple P SKUs, Microsoft's open source [semantic-link-labs](https://github.com/microsoft/semantic-link-labs) project includes a capacity migration notebook you import into Fabric, parameterize, and run.
+
+**Know the safety nets and the gotchas.** You get a free Premium capacity for the first 30 days after your old subscription ends, matched to your previous P size, so you are not paying for two capacities at once, and you keep access to your Power BI data for 90 days while you transition. Same region moves have no real downtime since it is a billing change, though it can take up to an hour before users can create Fabric items in the new capacity. When a workspace is reassigned, active jobs are cancelled and need a rerun, while scheduled jobs are not affected. One more limit: you cannot drop below F64 and keep Premium features, so resist the urge to downsize to F32. And VNet or on premises gateways must be reassigned to the new capacity by hand.
 
 ## Where this is heading
 
