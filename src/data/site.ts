@@ -154,8 +154,9 @@ export const experience: Experience[] = [
     end: "Nov 2025",
     location: "Remote",
     summary:
-      "Delivered agentic AI, NLP, and applied machine learning solutions end to end on Azure, from data pipelines to production deployment and dashboards.",
+      "Delivered end-to-end data and AI solutions on Microsoft Azure at Lantern, a Microsoft partner, spanning agentic AI, NLP, and applied machine learning from data pipelines through production deployment and Power BI dashboards.",
     highlights: [
+      "Built across the Microsoft Azure data and AI stack as a Microsoft partner, from Azure Machine Learning and Azure OpenAI to Microsoft Fabric and Azure DevOps",
       "Agentic AI document automation cut manual review time by 70%",
       "Attrition prediction model improved planning accuracy by 30%",
       "NLP litigation risk modeling reduced legal costs by 20%",
