@@ -33,7 +33,7 @@ Nothing breaks overnight, and no capacity is converted automatically. The trigge
 
 ## The SKU map
 
-Compute lines up cleanly. Each P SKU has an F SKU with the same capacity units and v-cores.
+Compute lines up cleanly. Each P SKU has an F SKU with the same capacity units and v-cores. Microsoft publishes the [full P to F capacity table](https://learn.microsoft.com/en-us/fabric/enterprise/licenses) if you want the complete list.
 
 ![Power BI Premium P SKUs mapped to Microsoft Fabric F SKUs by capacity units and v-cores](/images/blog/from-p-to-f-migrating-power-bi-premium-to-fabric-capacity/skumap.png)
 
@@ -52,7 +52,7 @@ One caution: the map is a compute comparison, not a promise of identical perform
 If the switch were only a rename, this would be a chore. It is actually an upgrade, and that is worth understanding before you file it under paperwork.
 
 - **The whole Fabric platform, not just Power BI.** Fabric is a superset of Premium. The same capacity that runs your reports also runs lakehouses, warehouses, notebooks, pipelines, eventhouses, and real time analytics. You stop paying for a reporting engine and start paying for a data platform.
-- **Azure billing and flexibility.** P SKUs were a Microsoft 365 subscription with a monthly or yearly commitment. F SKUs are Azure resources. You can run pay as you go, or commit with a one year reservation that saves up to 40.5 percent over pay as you go pricing. Because they are Azure resources, you can also scale, pause, and resume capacity, which is a real cost lever for workloads that do not run around the clock.
+- **Azure billing and flexibility.** P SKUs were a Microsoft 365 subscription with a monthly or yearly commitment. F SKUs are Azure resources. You can run pay as you go, or commit with a one year reservation that saves up to 40.5 percent over pay as you go pricing (see the [Microsoft Fabric pricing page](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/)). Because they are Azure resources, you can also scale, pause, and resume capacity, which is a real cost lever for workloads that do not run around the clock.
 - **MACC eligible.** Fabric spend counts toward your Microsoft Azure Consumption Commitment. For many enterprises that alone changes the math.
 - **Azure only features.** Trusted workspace access, managed private endpoints, and Azure management surfaces are available on F SKUs and were never part of P.
 - **Embedded and Report Server included.** Power BI Embedded comes with F SKUs, and Power BI Report Server is included with F64 and higher reserved instances.
@@ -75,7 +75,7 @@ A quick way to tell your bucket: check whether the target capacity is in the sam
 
 Get these in place before migration day so nothing blocks you mid move:
 
-1. **Buy the target Fabric capacity.** Create the F SKU in the Azure portal, sized from your actual usage (see Step 3). If this is the first Fabric capacity on the subscription, register the Microsoft.Fabric resource provider first, otherwise provisioning fails.
+1. **Buy the target Fabric capacity.** Create the F SKU in the Azure portal, sized from your actual usage (see Step 3), and check the [Microsoft Fabric pricing page](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/) for the SKUs and regional rates. If this is the first Fabric capacity on the subscription, register the Microsoft.Fabric resource provider first, otherwise provisioning fails.
 2. **Sort out the roles.** Assign the Fabric Administrator role to whoever runs the tenant level move, and the Capacity Administrator role to whoever manages the new capacity. To reassign an individual workspace, you also need admin rights on that workspace and assignment rights on the target capacity.
 3. **Check reservation permissions.** If you want the one year reservation discount, confirm you have the Azure owner or reservation purchaser role on the subscription, and buy the reservation before running any automated tooling.
 4. **Confirm your quota.** Fabric capacity is subject to an Azure quota of capacity units per subscription and region. In the Azure portal, open Quotas, filter to Microsoft Fabric, and request an increase if you lack headroom for the new capacity. Increases are usually auto approved within minutes.
@@ -130,3 +130,4 @@ Everything here is drawn from Microsoft's public announcements and documentation
 - [Understand Microsoft Fabric licenses](https://learn.microsoft.com/en-us/fabric/enterprise/licenses) (Microsoft Learn, SKUs and capacity rules)
 - [Automate your migration to Microsoft Fabric capacities](https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/12/02/automate-your-migration-to-microsoft-fabric-capacities/) (Microsoft Fabric blog, manual and automated migration steps)
 - [Microsoft Fabric quotas](https://learn.microsoft.com/en-us/fabric/enterprise/fabric-quotas) (Microsoft Learn, viewing and requesting capacity quota)
+- [Microsoft Fabric pricing](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/) (Azure, F SKUs with regional pay as you go and reservation rates)
