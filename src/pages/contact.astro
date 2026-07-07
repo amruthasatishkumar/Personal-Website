@@ -32,7 +32,7 @@ import { site } from "@/data/site";
 
     <form id="contact-form" class="glass reveal mt-6 rounded-3xl p-6 sm:p-8">
       <input type="hidden" name="access_key" value={site.web3formsKey} />
-      <input type="hidden" name="subject" value="New message from your portfolio site" />
+      <input type="hidden" name="subject" value="New message from buildwithamrutha.com" />
       <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
 
       <div class="grid gap-5 sm:grid-cols-2">
@@ -88,7 +88,7 @@ import { site } from "@/data/site";
           status.style.color = "#ff6b6b";
         }
       } catch {
-        status.textContent = "Something went wrong. Please email me instead.";
+        status.textContent = "Something went wrong. Please reach out on LinkedIn instead.";
         status.style.color = "#ff6b6b";
       }
     });

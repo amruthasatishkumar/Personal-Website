@@ -32,7 +32,6 @@ export const quickFacts: string[] = [
 export const nav: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Blog", href: "/blog" },
-  { label: "Builds", href: "/builds" },
   { label: "About", href: "/about" },
   { label: "Experience", href: "/experience" },
   { label: "Contact", href: "/contact" },
