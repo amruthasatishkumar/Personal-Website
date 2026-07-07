@@ -21,7 +21,7 @@ export const site = {
 } as const;
 
 export const quickFacts: string[] = [
-  "7+ years in Data & AI",
+  "5+ years in Data & AI",
   "Agentic AI",
   "Microsoft Fabric",
   "Azure AI Foundry",
@@ -93,7 +93,7 @@ export const focusCards: FocusCard[] = [
 export type Stat = { value: string; label: string };
 
 export const stats: Stat[] = [
-  { value: "7+", label: "Years across data & AI" },
+  { value: "5+", label: "Years across data & AI" },
   { value: "100+", label: "Enterprise customers" },
   { value: "35+", label: "Solutions shipped to production" },
   { value: "6", label: "Microsoft certifications" },
