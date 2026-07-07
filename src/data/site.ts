@@ -128,6 +128,7 @@ export type Experience = {
   summary: string;
   highlights?: string[];
   stack?: string[];
+  partner?: boolean;
 };
 
 export const experience: Experience[] = [
@@ -149,6 +150,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Lantern",
+    partner: true,
     role: "Associate Data Consultant, Data Platforms & AI",
     start: "May 2022",
     end: "Nov 2025",
@@ -165,6 +167,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Lantern",
+    partner: true,
     role: "Data Science Intern",
     start: "Jan 2022",
     end: "Apr 2022",

@@ -54,6 +54,7 @@ import {
           <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
             <h3 class="font-display text-lg font-bold">
               {job.role} <span class="text-[var(--text-muted)]">· {job.company}</span>
+              {job.partner && <span class="chip ml-2 align-middle">Microsoft Partner</span>}
             </h3>
             <p class="text-sm text-[var(--text-faint)] whitespace-nowrap">
               {job.start} to {job.end}
