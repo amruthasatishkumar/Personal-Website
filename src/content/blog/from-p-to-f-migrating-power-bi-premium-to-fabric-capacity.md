@@ -85,7 +85,7 @@ Get these in place before migration day so nothing blocks you mid move:
 Do not lift and shift blindly. Inventory first:
 
 - **List what is actually in the capacity.** Old, unused reports and workspaces are a chance to clean up rather than carry over, which also lowers the capacity size you need.
-- **Right size with real data.** Use the Microsoft Fabric Capacity Metrics app or a Fabric trial to measure current utilization, then map that to the target F SKU instead of guessing.
+- **Right size with real data.** Use the Microsoft Fabric Capacity Metrics app (formerly the Power BI Premium Capacity Metrics app) or a Fabric trial to measure current utilization, then map that to the target F SKU instead of guessing.
 - **Flag the awkward items early.** Large semantic models and any Fabric items change the plan, especially cross region. Large data format models must be converted to small data format before any cross region move.
 - **Consider a Fabric off switch.** If you have few or no Fabric items, temporarily turning off Fabric features as you migrate can speed things up. This is Microsoft's own recommended shortcut for Power BI only estates.
 
