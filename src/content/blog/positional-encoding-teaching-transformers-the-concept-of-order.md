@@ -9,7 +9,7 @@ readTime: "2 min"
 featured: false
 draft: false
 ---
-When I first learned about **Transformers**, one thing blew my mind, they process all words in a sentence _simultaneously._
+One thing about **Transformers** stands out immediately, they process all words in a sentence _simultaneously._
 
 That parallelism is what makes them so powerful but it also raises a question
 

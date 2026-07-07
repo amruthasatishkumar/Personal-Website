@@ -11,7 +11,7 @@ draft: false
 ---
 As data systems evolve, the conversation around security is changing just as fast. It’s no longer only about databases and storage accounts it’s about data flowing across cloud services, endpoints, collaboration platforms, and increasingly, AI systems.
 
-I recently started the **SC-401T00-A: Information Security Administrator** course, and the first module, _Protect sensitive data in a digital world_ immediately reframed how I think about information security in modern architectures.
+Modern architectures demand a different way of thinking about information security, one that starts with the sensitive data itself, not just the systems around it.
 
 What stood out to me wasn’t just another Microsoft security capability. It was the shift in mindset from protecting infrastructure to protecting data itself, wherever it lives and moves.
 

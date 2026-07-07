@@ -9,9 +9,9 @@ readTime: "3 min"
 featured: false
 draft: false
 ---
-In my last few articles, I’ve explored some of the most important pieces of the Transformer architecture : Attention, Positional Encoding, and Multi-Head Attention.
+The most talked-about pieces of the Transformer architecture are Attention, Positional Encoding, and Multi-Head Attention.
 
-Each of these mechanisms helps a Transformer understand _relationships, structure, and meaning_. But there’s one final piece I’ve been learning about that often goes unnoticed, yet plays a crucial role:
+Each of these mechanisms helps a Transformer understand _relationships, structure, and meaning_. But there is one final piece that often goes unnoticed, yet plays a crucial role:
 
 **Feed-Forward Networks (FFN)** is the layer that transforms raw attention outputs into deeper, more meaningful representations.
 

@@ -9,17 +9,11 @@ readTime: "4 min"
 featured: false
 draft: false
 ---
-Until recently, my understanding of AI was rooted in traditional machine learning : logistic regression, random forests, and classification models.
+For years, applied AI was rooted in traditional machine learning : logistic regression, random forests, and classification models.
 
-Then the AI world exploded.
+Then the field shifted.
 
-Transformers, embeddings, large language models, there was suddenly an entirely new vocabulary to learn. I tried to keep up: reading blogs, running experiments, taking notes, and building small prototypes. But it always felt like puzzle pieces scattered across the table.
-
-So I decided to do something more structured.
-
-I enrolled in a **Data Science and AI course on Udemy**, one that covers everything from core ML to the latest in Generative AI. And as I go through it, I want to document what I’m learning here to connect those scattered dots, and maybe help others who are walking through the same maze of curiosity and confusion.
-
-This week’s topic? One of the most fundamental ideas behind modern AI: **Transformers**.
+Transformers, embeddings, and large language models brought an entirely new vocabulary, and a fundamentally different way for machines to process information. This post starts at the foundation of that shift: one of the most important ideas behind modern AI, **Transformers**.
 
 ## **What Exactly Are Transformers?**
 

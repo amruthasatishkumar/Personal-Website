@@ -9,7 +9,7 @@ readTime: "3 min"
 featured: false
 draft: false
 ---
-In my last post, I explored **Positional Encoding** the elegant design that gives Transformers a sense of order. This week, I focused on what makes them truly powerful:
+**Positional Encoding** gives Transformers a sense of order. But what makes them truly powerful is something else:
 
 **Multi-Head Attention.**
 

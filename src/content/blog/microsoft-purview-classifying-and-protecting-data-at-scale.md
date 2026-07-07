@@ -9,7 +9,7 @@ readTime: "4 min"
 featured: true
 draft: false
 ---
-When I first started understanding data security, the biggest mindset shift for me was that modern security is less about guarding infrastructure and more about protecting data itself wherever it moves.
+The biggest mindset shift in modern data security is this: it is less about guarding infrastructure and more about protecting the data itself, wherever it moves.
 
 The next set of modules builds directly on that foundation and answers a practical question:
 

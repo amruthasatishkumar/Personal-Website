@@ -9,9 +9,9 @@ readTime: "3 min"
 featured: false
 draft: false
 ---
-Last week, I wrote about **Transformers**, the architecture that changed the trajectory of modern AI.
+**Transformers** changed the trajectory of modern AI.
 
-But this week, I dug into the real reason _why_ they work so well.
+The real reason they work so well comes down to one mechanism: attention.
 
 If Transformers are the _brain_ of AI, the **attention mechanism** is the _thought process_ that makes them intelligent. It’s the part that decides for every single word and identify what’s important, what’s not, and how everything connects.
 
@@ -35,7 +35,7 @@ That ability to dynamically understand context is what made Transformers outperf
 
 ### **The Components : Queries, Keys, and Values**
 
-The attention mechanism relies on three simple components: **Query (Q)**, **Key (K)**, and **Value (V)**. When I first came across these terms, they sounded confusingly abstract. But they actually come from a very intuitive idea that is "**_search and retrieval_**_"._
+The attention mechanism relies on three simple components: **Query (Q)**, **Key (K)**, and **Value (V)**. These terms sound abstract at first, but they come from a very intuitive idea that is "**_search and retrieval_**_"._
 
 Imagine you’re in a library.
 
@@ -54,7 +54,7 @@ That’s how the Transformer builds contextual meaning, not through order, but t
 
 ## **Self-Attention and Cross-Attention**
 
-As I went deeper into the course, I learned that there are different ways models apply attention:
+There are different ways models apply attention:
 
 -   **Self-Attention:** Used in both encoders and decoders, where every token looks at all other tokens in the same sequence to build understanding. Example: Understanding the meaning of “bank” differently in “river bank” vs. “money bank.”
     
@@ -82,9 +82,9 @@ Each head looks at the same input from a different angle like multiple people re
 
 That’s what gives Transformers such depth and nuance. They don’t just read text they _analyze it in parallel._
 
-## **My Takeaway**
+## **The Takeaway**
 
-After spending this week studying the Attention Mechanism, I think I finally get why it’s called _self-attention_.
+Once the mechanism clicks, the name _self-attention_ makes sense.
 
 Every word, every token, every embedding contributes to building meaning, and the model learns to weight those relationships dynamically.
 
