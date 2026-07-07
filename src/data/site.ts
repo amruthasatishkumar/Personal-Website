@@ -158,11 +158,8 @@ export const experience: Experience[] = [
     highlights: [
       "Built across the Microsoft Azure data and AI stack as a Microsoft partner, from Azure Machine Learning and Azure OpenAI to Microsoft Fabric and Azure DevOps",
       "Agentic AI document automation cut manual review time by 70%",
-      "Attrition prediction model improved planning accuracy by 30%",
-      "NLP litigation risk modeling reduced legal costs by 20%",
-      "Azure Fabric pipelines reduced model training time by 25%",
-      "Azure MLOps reduced deployment time by 30%",
       "Azure DevOps CI/CD reduced release errors by 40%",
+      "NLP litigation risk modeling reduced legal costs by 20%",
     ],
     stack: ["Azure ML", "Azure OpenAI", "Microsoft Fabric", "Power BI", "MLOps", "Azure DevOps"],
   },
@@ -246,7 +243,6 @@ export const experience: Experience[] = [
 export type Impact = { metric: string; label: string; detail: string };
 
 export const impact: Impact[] = [
-  { metric: "100+", label: "Enterprise customers advised", detail: "Across education, ISVs, and universities" },
   { metric: "70%", label: "Less manual review", detail: "Agentic AI document automation" },
   { metric: "40%", label: "Fewer release errors", detail: "CI/CD automation on Azure DevOps" },
   { metric: "30%", label: "Faster deployments", detail: "MLOps on Azure Machine Learning" },
