@@ -5,7 +5,7 @@ pubDate: 2026-07-06
 category: "Data"
 tags: ["Data", "PowerBI", "Fabric", "Licensing"]
 cover: "/images/blog/from-p-to-f-migrating-power-bi-premium-to-fabric-capacity/cover.png"
-readTime: "8 min"
+readTime: "9 min"
 featured: true
 draft: false
 ---
@@ -52,7 +52,7 @@ One caution: the map is a compute comparison, not a promise of identical perform
 If the switch were only a rename, this would be a chore. It is actually an upgrade, and that is worth understanding before you file it under paperwork.
 
 - **The whole Fabric platform, not just Power BI.** Fabric is a superset of Premium. The same capacity that runs your reports also runs lakehouses, warehouses, notebooks, pipelines, eventhouses, and real time analytics. You stop paying for a reporting engine and start paying for a data platform.
-- **Azure billing and flexibility.** P SKUs were a Microsoft 365 subscription with a monthly or yearly commitment. F SKUs are Azure resources. You can commit with a reservation for the best price, or run pay as you go. Because they are Azure resources, you can pause and resume capacity, which is a real cost lever for workloads that do not run around the clock.
+- **Azure billing and flexibility.** P SKUs were a Microsoft 365 subscription with a monthly or yearly commitment. F SKUs are Azure resources. You can run pay as you go, or commit with a one year reservation that saves up to 40.5 percent over pay as you go pricing. Because they are Azure resources, you can also scale, pause, and resume capacity, which is a real cost lever for workloads that do not run around the clock.
 - **MACC eligible.** Fabric spend counts toward your Microsoft Azure Consumption Commitment. For many enterprises that alone changes the math.
 - **Azure only features.** Trusted workspace access, managed private endpoints, and Azure management surfaces are available on F SKUs and were never part of P.
 - **Embedded and Report Server included.** Power BI Embedded comes with F SKUs, and Power BI Report Server is included with F64 and higher reserved instances.
@@ -66,8 +66,8 @@ The mechanics are simpler than the licensing, but the effort depends entirely on
 Figure out which one you are in before you touch anything, because they are not equal.
 
 - **Same tenant, same region.** The easy path. You reassign your workspaces to the new Fabric capacity in the admin portal. It is a billing change, not a rebuild, and it covers both Power BI and Fabric items. Most migrations are this.
-- **Same tenant, different region.** Doable for Power BI items, but large storage format semantic models do not move cross region automatically. You redeploy them or use backup and restore. Budget more time.
-- **Cross region with Fabric items, or cross tenant.** Not a simple reassignment. Fabric items do not move cross region natively, and nothing moves across tenants by assignment. Treat these as recreate and redeploy projects rather than swaps.
+- **Same tenant, different region.** Doable for Power BI items, but there are two catches. A workspace that holds Fabric items (pipelines, shortcuts, ML, and so on) cannot move to another region until you move or delete those Fabric items first. And large data format semantic models cannot cross regions either, so you convert them to small data format first, or redeploy them. Budget more time.
+- **Cross region with Fabric items, or cross tenant.** Not a simple reassignment. Cross tenant especially: nothing moves across tenants by assignment, every item has to be recreated in the new tenant. Treat these as recreate and redeploy projects rather than swaps.
 
 ### Step 2: Line up the prerequisites
 
@@ -79,25 +79,25 @@ Figure out which one you are in before you touch anything, because they are not 
 ### Step 3: Discover before you move
 
 - Inventory what is actually in the capacity. Old, unused reports are a chance to clean up rather than carry over.
-- Flag large semantic models and any Fabric items early, since they change the plan, especially cross region.
-- If there are no Fabric items, temporarily turning off Fabric features can speed things up.
+- Flag large semantic models and any Fabric items early, since they change the plan, especially cross region. Large data format models must be converted to small data format before any cross region move.
+- If you have few or no Fabric items, temporarily turning off Fabric features as you migrate can speed things up. This is Microsoft's own recommended shortcut for Power BI only estates.
 
 ### Step 4: Move the workspaces
 
 Two ways, depending on scale.
 
-- **Admin portal, manually.** Reassign each workspace to the new Fabric capacity. Best for a handful of workspaces.
-- **Automated notebook.** For many workspaces or multiple P SKUs, Microsoft's open source [semantic-link-labs](https://github.com/microsoft/semantic-link-labs) project includes a capacity migration notebook you import into Fabric, parameterize, and run.
+- **Admin portal, manually.** For a handful of workspaces, reassign each one directly. You can do it per workspace from that workspace's settings (you need admin rights on the workspace and assignment rights on the target capacity), or in bulk from the admin portal, where you can assign workspaces by user or group, by specific workspace name, or for the entire organization at once.
+- **Automated notebook.** For many workspaces or multiple P SKUs, Microsoft's open source [semantic-link-labs](https://github.com/microsoft/semantic-link-labs) project includes a Capacity Migration notebook you import into Fabric and run. It creates a pay as you go F SKU in the same region, with equivalent capacity and the same admins, and migrates all the workspaces. Two things it does not do for you: it will not carry over capacity level settings such as disaster recovery, notifications, and delegated tenant settings, and it will not set up a reserved instance, so arrange the reservation first if you want one.
 
 ### Step 5: Cut over, then clean up
 
 Once your workspaces are reassigned, delete the old P capacity. A few things to keep in mind through the cutover:
 
-- **Safety nets.** You get a free Premium capacity for the first 30 days after your old subscription ends, matched to your previous P size, and you keep access to your Power BI data for 90 days while you transition.
-- **Downtime.** Same region moves have no real downtime since it is a billing change, though it can take up to an hour before users can create Fabric items in the new capacity.
-- **Jobs.** When a workspace is reassigned, active jobs are cancelled and need a rerun, while scheduled jobs are not affected.
+- **Safety nets.** You get a free Premium capacity for the first 30 days after your old subscription ends, matched to your previous P size, and you keep access to your Power BI data for 90 days while you transition. This is designed so you are not paying for two capacities at once.
+- **Pick a quiet window.** Microsoft's guidance is to migrate when users and jobs are not active, to reduce the chance of failures.
+- **Jobs.** When a workspace is reassigned, its active jobs are cancelled and need a rerun. Scheduled jobs are not affected and resume once migration is complete.
 - **Do not downsize below F64.** F32 or lower loses Premium features and free viewer access, so most Premium customers stay at F64 or higher.
-- **Gateways.** VNet or on premises gateways must be reassigned to the new capacity by hand.
+- **Validate after cutover.** A P1 workspace moved to its F64 equivalent should behave the same, but Microsoft recommends confirming through testing if you have specific performance concerns.
 
 ## Where this is heading
 
@@ -112,3 +112,5 @@ Everything here is drawn from Microsoft's public announcements and documentation
 - [Important update coming to Power BI Premium licensing](https://powerbi.microsoft.com/blog/important-update-coming-to-power-bi-premium-licensing/) (official Power BI blog, the retirement timeline)
 - [Power BI Premium FAQ](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-faq) (Microsoft Learn, transition, migration, and grace periods)
 - [Understand Microsoft Fabric licenses](https://learn.microsoft.com/en-us/fabric/enterprise/licenses) (Microsoft Learn, SKUs and capacity rules)
+- [Automate your migration to Microsoft Fabric capacities](https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/12/02/automate-your-migration-to-microsoft-fabric-capacities/) (Microsoft Fabric blog, manual and automated migration steps)
+- [Microsoft Fabric quotas](https://learn.microsoft.com/en-us/fabric/enterprise/fabric-quotas) (Microsoft Learn, viewing and requesting capacity quota)
