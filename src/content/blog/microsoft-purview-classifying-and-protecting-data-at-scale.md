@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Purview : Classifying and Protecting Data at Scale"
-description: ""
+description: "How Microsoft Purview classifies and protects sensitive data at scale using sensitive information types, sensitivity labels, and automated policy across your estate."
 pubDate: 2026-02-20
 category: "Data"
 tags: ["Data", "AI", "Security", "Governance"]

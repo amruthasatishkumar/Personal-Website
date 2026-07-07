@@ -1,6 +1,6 @@
 ---
 title: "Multi-Head Attention: How Transformers Think in Parallel"
-description: ""
+description: "Why Transformers use multiple attention heads instead of one, and how parallel heads capture different relationships and combine into a richer understanding of text."
 pubDate: 2026-02-20
 category: "AI"
 tags: ["AI", "Transformers"]

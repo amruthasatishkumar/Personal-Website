@@ -1,6 +1,6 @@
 ---
 title: "Understanding Transformers : Encoder, Decoder, and Everything In Between"
-description: ""
+description: "Encoder-only, decoder-only, and encoder-decoder Transformers explained, and how models like BERT, GPT, and T5 map to each, with plain-language intuition."
 pubDate: 2026-02-20
 category: "AI"
 tags: ["AI", "Transformers"]

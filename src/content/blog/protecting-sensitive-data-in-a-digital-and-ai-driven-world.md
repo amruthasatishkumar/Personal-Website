@@ -1,6 +1,6 @@
 ---
 title: "Protecting Sensitive Data in a Digital (and AI-Driven) World"
-description: ""
+description: "Modern data security is shifting from protecting infrastructure to protecting the data itself, wherever it lives and moves. A practical look at why that matters."
 pubDate: 2026-02-20
 category: "Data"
 tags: ["Data", "Security", "Governance", "AI"]
@@ -17,7 +17,7 @@ What stood out to me wasn’t just another Microsoft security capability. It was
 
 ## **The Growing Need for Data Protection**
 
-One of the first themes this module emphasizes is how dramatically the **attack surface has expanded**.
+One of the biggest shifts is how dramatically the **attack surface has expanded**.
 
 Data today isn’t confined to a single system or environment. It moves constantly across:
 
@@ -36,7 +36,7 @@ The focus has to shift from where data is stored to how data is used.
 
 ## **The Challenge of Managing Sensitive Data**
 
-This module clearly lays out why managing sensitive data is difficult at scale:
+Managing sensitive data is genuinely difficult at scale, for a few reasons:
 
 -   Organizations often don’t have full visibility into what sensitive data exists
     
