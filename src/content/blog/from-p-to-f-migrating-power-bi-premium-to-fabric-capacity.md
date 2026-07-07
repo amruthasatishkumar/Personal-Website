@@ -72,3 +72,11 @@ Two things protect you during the cutover. You get a free Premium capacity for t
 The P to F move is Microsoft closing the gap between business intelligence and data platform. Power BI is no longer a product you buy on its own. It is a view into Fabric. If you treat the renewal as a simple swap, you will end up on F and never touch the four fifths of the platform you are now paying for. The teams that win here treat the migration as the moment to ask a bigger question: now that the reporting capacity is also a full data platform, what else should live on it?
 
 Is your next renewal before or after you have a Fabric plan? That is the only deadline that really matters.
+
+## Sources
+
+Everything here is drawn from Microsoft's public announcements and documentation:
+
+- [Important update coming to Power BI Premium licensing](https://powerbi.microsoft.com/blog/important-update-coming-to-power-bi-premium-licensing/) (official Power BI blog, the retirement timeline)
+- [Power BI Premium FAQ](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-faq) (Microsoft Learn, transition, migration, and grace periods)
+- [Understand Microsoft Fabric licenses](https://learn.microsoft.com/en-us/fabric/enterprise/licenses) (Microsoft Learn, SKUs and capacity rules)
