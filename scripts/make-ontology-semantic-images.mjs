@@ -77,8 +77,8 @@ const diagram = `
   <text x="80" y="103" fill="#9aa3bd" font-size="17" font-family="Segoe UI, Arial, sans-serif">Numbers you can trust, meaning agents can act on.</text>
 
   <!-- Consumers -->
-  ${card(80, 132, 460, 104, "#4f7cff", "Data agents &amp; Copilot", "reason across concepts,", "take governed actions")}
-  ${card(560, 132, 460, 104, "#4f7cff", "Power BI reports", "trusted KPIs,", "interactive visuals")}
+  ${card(80, 132, 460, 104, "#7c5cff", "Power BI reports", "trusted KPIs,", "interactive visuals")}
+  ${card(560, 132, 460, 104, "#22d3ee", "Data agents &amp; Copilot", "reason across concepts,", "take governed actions")}
 
   ${upArrow(300, 300, 240)}
   ${upArrow(800, 300, 240)}

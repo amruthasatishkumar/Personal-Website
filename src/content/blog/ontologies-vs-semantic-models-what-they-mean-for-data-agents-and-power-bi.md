@@ -1,6 +1,6 @@
 ---
 title: "Ontologies vs Semantic Models: What They Mean for Data Agents and Power BI"
-description: "An ontology and a Power BI semantic model are not the same thing, and not rivals. Here is what each one does, and why the pairing is what makes data agents trustworthy."
+description: "An ontology and a Power BI semantic model are not the same thing. Here is what each does, when to use which, and why the pairing makes data agents trustworthy."
 pubDate: 2026-07-09
 category: "Data & AI"
 tags: ["Data & AI", "Fabric", "PowerBI", "Agents"]
@@ -12,9 +12,9 @@ draft: false
 
 ## Two words that are quietly confusing every data team
 
-For a decade, the semantic model was the trusted heart of a Power BI solution. Then Microsoft introduced ontologies as part of Fabric IQ, and a lot of data teams started asking the same question: is an ontology just a new name for a semantic model, is it a replacement, and what does it mean for the reports and data agents we are already building?
+For a decade, the semantic model was the trusted heart of a Power BI solution. Then Microsoft introduced ontologies as part of [Fabric IQ](/blog/fabric-iq-fabric-data-agents-azure-ai-foundry-and-mcp-how-they-work-together), and a lot of data teams started asking the same question: is an ontology just a new name for a semantic model, is it a replacement, and what does it mean for the reports and data agents we are already building?
 
-The short answer is that they are different things doing different jobs, and the best way to understand either one is to understand the other. Ontology in Fabric IQ is currently in preview, but the concept is worth getting right now, because it changes how you think about agent-ready data.
+The short answer is that they are different things doing different jobs, and the best way to understand either one is to understand the other. Ontology in Fabric IQ is currently in preview, but the concept is worth getting right now, because it changes how you think about [agent-ready data](/blog/agent-ready-data-why-dashboard-ready-data-is-no-longer-enough).
 
 ## What a semantic model actually does
 
@@ -91,7 +91,7 @@ If you are not sure, start with the semantic model you already trust, then add a
 
 ## What it means for Power BI
 
-If you have invested years in Power BI semantic models, none of this makes that work obsolete. The opposite is true. Power BI stays the analytics and reporting layer, the place business users get trusted KPIs and interactive visuals. The semantic model becomes the trusted foundation an ontology is generated from and aligned to. The modeling discipline you already have, clean measures and well-defined relationships, is exactly what makes an ontology and the agents on top of it reliable. Good semantic modeling was always the real product. Now it is also the on-ramp to agent-ready data.
+If you have invested years in Power BI semantic models, none of this makes that work obsolete. The opposite is true. Power BI stays the analytics and reporting layer, the place business users get trusted KPIs and interactive visuals. The semantic model becomes the trusted foundation an ontology is generated from and aligned to. The [modeling discipline you already have](/blog/the-foundation-beneath-every-power-bi-report), clean measures and well-defined relationships, is exactly what makes an ontology and the agents on top of it reliable. Good semantic modeling was always the real product. Now it is also the on-ramp to agent-ready data.
 
 ## Where this is heading
 
