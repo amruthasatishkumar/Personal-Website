@@ -18,35 +18,64 @@ The short answer is that they are different things doing different jobs, and the
 
 ## What a semantic model actually does
 
-A Power BI semantic model is a curated analytics layer. It sits over your data and defines measures, hierarchies, dimensions, and relationships that are optimized for reporting. Its job is to give business users trusted KPIs and fast, interactive visuals. When someone asks "what was revenue last quarter by region," the semantic model turns that into a correct, consistent number, the same number no matter which report they open.
+A Power BI semantic model is a curated analytics layer. It sits over your data and gives business users trusted, consistent numbers.
 
-That is its strength, and also its scope. A semantic model is built for analytics. It answers questions about numbers.
+It defines:
+
+- **Measures** like revenue, margin, and active customers
+- **Hierarchies and dimensions** like date, region, and product
+- **Relationships** between tables, so one question fans out correctly
+
+Ask "what was revenue last quarter by region," and the model returns the same correct number no matter which report you open. That is its strength, and also its scope. A semantic model is built for analytics. It answers questions about **numbers**.
 
 ## What an ontology adds
 
-An ontology works at a different level. Instead of measures and visuals, it defines the core business entities themselves: entity types, their relationships, their properties, and the rules and actions that apply to them. It is a shared business vocabulary. It says a Customer is a thing, a Shipment is a thing, a Shipment belongs to an Order, a Temperature Sensor is attached to a Shipment, and a Cold Chain Breach is what happens when that sensor crosses a threshold.
+An ontology works at a different level. Instead of measures and visuals, it captures the business itself as a shared vocabulary.
 
-The difference shows up the moment a question spans concepts. A semantic model can tell you how many shipments were late. An ontology lets you traverse the chain, Order to Shipment to Temperature Sensor to Cold Chain Breach, and explain why. That relationship-first, cross-domain reasoning is what an ontology is for, which is why Fabric IQ pairs the ontology with a graph that stores and traverses those connections.
+It defines:
+
+- **Entity types**: what a Customer, an Order, a Shipment, or an Asset is
+- **Relationships**: a Shipment belongs to an Order, a Sensor is attached to a Shipment
+- **Properties and rules**: what governs each entity, like the threshold that defines a breach
+- **Actions**: what can be done, and how an agent can invoke it
+
+The difference shows up the moment a question spans concepts. A semantic model can tell you how many shipments were late. An ontology lets you **trace the chain**, Order to Shipment to Temperature Sensor to Cold Chain Breach, and explain why. That relationship-first reasoning is why Fabric IQ pairs the ontology with a graph that stores and traverses those connections.
 
 ## Tables versus meaning
 
-Here is the cleanest way to hold the distinction.
+Data lives in tables and schemas, structures built for machines. Businesses do not run on tables. They run on concepts: customers, assets, orders, breaches. The semantic model organizes the numbers. The ontology encodes the meaning.
 
 ![How OneLake grounds a Power BI semantic model and an ontology, which together ground data agents and Power BI reports](/images/blog/ontologies-vs-semantic-models-what-they-mean-for-data-agents-and-power-bi/ontology-vs-semantic.png)
 
-Data lives in tables and schemas, which are structures built for machines. Businesses do not run on tables. They run on concepts: customers, assets, orders, breaches. A semantic model organizes the numbers on top of those tables. An ontology encodes the meaning, how the concepts relate, what rules govern them, and what actions can be taken. One is optimized for analytics. The other is optimized for understanding and action.
+
+| | Power BI semantic model | Ontology (preview) |
+| --- | --- | --- |
+| **Models** | Measures, hierarchies, relationships | Entities, relationships, rules, actions |
+| **Optimized for** | Analytics and reporting | Meaning, reasoning, and action |
+| **Answers** | What are the numbers? | What do the concepts mean and how do they connect? |
+| **Consumed by** | Reports and dashboards | Data and operations agents, plus reports |
+| **Example** | Revenue last quarter by region | Trace an order to a cold-chain breach and explain it |
 
 ## They are not rivals, they are layers
 
-This is the part most "X versus Y" framings get wrong. Semantic models and ontologies are designed to work together. In Fabric IQ, an ontology can be generated directly from a Power BI semantic model that is already in production. Your existing measures, definitions, and business logic become the starting point, not throwaway work.
+This is the part most "X versus Y" framings get wrong. Semantic models and ontologies are designed to work together. In Fabric IQ, an ontology can be **generated directly from a Power BI semantic model** already in production, so your existing measures and business logic become the starting point, not throwaway work.
 
-The payoff is consistency. You define an enterprise concept like Customer or Shipment once, and it stays aligned across reports, agents, and applications. The KPI a Power BI report shows and the concept an agent reasons over trace back to the same definition, so people and AI look at one version of the truth instead of quietly diverging.
+The payoff is consistency:
+
+- Define an enterprise concept like Customer or Shipment **once**
+- It stays aligned across reports, agents, and applications
+- The KPI a report shows and the concept an agent reasons over trace back to the **same definition**
+
+People and AI end up looking at one version of the truth instead of quietly diverging.
 
 ## What it means for data agents
 
-This is where it gets practical. A Fabric data agent is a virtual analyst that answers natural language questions over your data. Without shared business context, the agent has to guess what your columns mean, and every ambiguous question needs a human expert to translate. Grounded in a semantic model and an ontology, the agent starts with your business language built in. It knows what a Customer is, how a Shipment relates to an Order, and which actions are valid.
+This is where it gets practical. A Fabric data agent is a virtual analyst that answers natural language questions over your data.
 
-That grounding is the difference between an agent that produces plausible answers and one you can trust for decisions. It is also what lets operations agents move from "here is a number" to "here is an anomaly, here is the governed action to take," because the ontology declares not just entities and relationships but the rules and actions attached to them. You can even query the ontology in natural language, which converts a business question into a structured query rather than a guess.
+- **Without shared context**, the agent has to guess what your columns mean, and every ambiguous question needs a human to translate.
+- **Grounded in a semantic model and an ontology**, it starts with your business language built in: what a Customer is, how a Shipment relates to an Order, and which actions are valid.
+
+That grounding is the difference between an agent that produces plausible answers and one you can trust for decisions. It is also what lets operations agents move from "here is a number" to "here is an anomaly, and here is the governed action to take," because the ontology declares the rules and actions attached to each entity. You can even query the ontology in plain language, which turns a business question into a structured query rather than a guess.
 
 ## What it means for Power BI
 
