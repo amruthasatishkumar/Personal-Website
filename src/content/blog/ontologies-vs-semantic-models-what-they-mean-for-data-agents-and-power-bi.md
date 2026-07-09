@@ -14,7 +14,7 @@ draft: false
 
 For a decade, the semantic model was the trusted heart of a Power BI solution. Then Microsoft introduced ontologies as part of [Fabric IQ](/blog/fabric-iq-fabric-data-agents-azure-ai-foundry-and-mcp-how-they-work-together), and a lot of data teams started asking the same question: is an ontology just a new name for a semantic model, is it a replacement, and what does it mean for the reports and data agents we are already building?
 
-The short answer is that they are different things doing different jobs, and the best way to understand either one is to understand the other. Ontology in Fabric IQ is currently in preview, but the concept is worth getting right now, because it changes how you think about [agent-ready data](/blog/agent-ready-data-why-dashboard-ready-data-is-no-longer-enough).
+Here is the sharpest way to put it: **a semantic model makes a report trustworthy, and an ontology makes an agent trustworthy.** They are related, and one can help you build the other, but you do not get one free with the other. Ontology in Fabric IQ is in preview, but the distinction is worth getting right now, because it changes how you build [agent-ready data](/blog/agent-ready-data-why-dashboard-ready-data-is-no-longer-enough).
 
 ## What a semantic model actually does
 
@@ -43,7 +43,7 @@ The difference shows up the moment a question spans concepts. A semantic model c
 
 ## Tables versus meaning
 
-Data lives in tables and schemas, structures built for machines. Businesses do not run on tables. They run on concepts: customers, assets, orders, breaches. The semantic model organizes the numbers. The ontology encodes the meaning.
+Your data lives in tables and schemas, structures built for machines. Businesses do not run on tables. They run on concepts: customers, assets, orders, breaches. The table below is the fastest way to see which layer handles which.
 
 ![How OneLake grounds a Power BI semantic model and an ontology, which together ground data agents and Power BI reports](/images/blog/ontologies-vs-semantic-models-what-they-mean-for-data-agents-and-power-bi/ontology-vs-semantic.png)
 
@@ -58,17 +58,11 @@ Data lives in tables and schemas, structures built for machines. Businesses do n
 
 ## They are not the same thing
 
-This is the part most "X versus Y" framings get wrong. Semantic models and ontologies are not the same, and they are not competing. They are built to work together. You can bootstrap an ontology from a Power BI semantic model already in production, which reuses trusted definitions and business terminology so you are not starting from a blank page.
+They are related, but not interchangeable, and this is where teams get burned. You can bootstrap an ontology from a Power BI semantic model already in production, and that is a real head start: your trusted definitions and terminology carry over.
 
-One expectation to set, though: ontology is in preview, so generating from a semantic model gives you a starting point, not a full automatic import. The entity relationships, rules, and actions that make an ontology valuable are something you model on top. Do not expect your semantic model's table relationships to simply carry across.
+Be clear-eyed about what that head start is, though. Ontology is in preview, and generating from a semantic model gives you a **starting point, not a finished ontology**. The parts that make it valuable, the entity relationships, the rules, and the actions, are work you do on top. Your semantic model's table relationships do not simply become an ontology.
 
-The payoff is consistency:
-
-- Define an enterprise concept like Customer or Shipment **once**
-- It stays aligned across reports, agents, and applications
-- The KPI a report shows and the concept an agent reasons over trace back to the **same definition**
-
-People and AI end up looking at one version of the truth instead of quietly diverging.
+The reason to do that work is one definition of the truth. Define a concept like Customer once, and the number a report shows and the concept an agent reasons over trace back to the same place, instead of quietly diverging.
 
 ## What it means for data agents
 
@@ -91,11 +85,11 @@ If you are not sure, start with the semantic model you already trust, then add a
 
 ## What it means for Power BI
 
-If you have invested years in Power BI semantic models, none of this makes that work obsolete. The opposite is true. Power BI stays the analytics and reporting layer, the place business users get trusted KPIs and interactive visuals. The semantic model becomes the trusted foundation an ontology is generated from and aligned to. The [modeling discipline you already have](/blog/the-foundation-beneath-every-power-bi-report), clean measures and well-defined relationships, is exactly what makes an ontology and the agents on top of it reliable. Good semantic modeling was always the real product. Now it is also the on-ramp to agent-ready data.
+If you have invested years in Power BI semantic models, that work is not obsolete, it is your foundation. The [modeling discipline you already have](/blog/the-foundation-beneath-every-power-bi-report), clean measures and well-defined relationships, is exactly what makes an ontology and the agents on top of it reliable. Good semantic modeling was always the real product. What changes is that the report is no longer the finish line. It is the on-ramp, and the teams that stop at the dashboard will be out-executed by the teams that build meaning on top of it.
 
 ## Where this is heading
 
-The pattern is clear. As agents move into real decisions, the differentiator stops being which model you picked and becomes how well your business meaning is captured, governed, and reused. Semantic models gave us trusted numbers. Ontologies add trusted meaning. Put them together on a unified data foundation and you get something a report alone never could: data that both people and agents can reason over in the language of the business.
+As agents move into real decisions, the differentiator stops being which model you picked and becomes whether your data carries its own meaning. A report only has to be read by a human who already knows the business. An agent does not have that context, so it has to get it from somewhere. The ontology is that somewhere.
 
 If you are modeling data today, the question is shifting. Not just "are my numbers right," but "does my data know what my business means, well enough for an agent to act on it?"
 
