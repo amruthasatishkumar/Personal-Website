@@ -5,7 +5,7 @@ pubDate: 2026-07-09
 category: "Data & AI"
 tags: ["Data & AI", "Fabric", "PowerBI", "Agents"]
 cover: "/images/blog/ontologies-vs-semantic-models-what-they-mean-for-data-agents-and-power-bi/cover.png"
-readTime: "7 min"
+readTime: "9 min"
 featured: true
 draft: false
 ---
@@ -72,6 +72,32 @@ This is where it gets practical. A Fabric data agent is a virtual analyst that a
 - **Grounded in a semantic model and an ontology**, it starts with your business language built in: what a Customer is, how a Shipment relates to an Order, and which actions are valid.
 
 That grounding is the difference between an agent that produces plausible answers and one you can trust for decisions. It is also what lets operations agents move from "here is a number" to "here is an anomaly, and here is the governed action to take," because the ontology declares the rules and actions attached to each entity. You can even query the ontology in plain language, which turns a business question into a structured query rather than a guess.
+
+## A retail example, end to end
+
+Say a category manager asks: **"Why did revenue for our flagship product line drop last month?"**
+
+**With a semantic model alone**, a data agent can answer the *what*. It returns a clean, trusted number: revenue for the line fell 12 percent last month, concentrated in the Northeast. Useful, but it stops there. Explaining *why* is still a person's job, pulling threads across sales, inventory, and promotions by hand.
+
+**With an ontology underneath**, the agent can answer the *why*, because it knows how the business connects. It follows the relationships:
+
+- The **product line** is sold across **stores**
+- Those stores track **inventory**, supplied by specific **suppliers**
+- The products were tied to a **promotion** that ended, and to a **price**
+
+Tracing that chain, the agent can say: revenue dropped because a promotion ended on the two best-selling SKUs, while a supplier delay left those same SKUs out of stock across Northeast stores. And because the ontology also declares **actions**, the agent can do more than explain. It can flag the stockout to the category manager or open a reorder, within governed limits.
+
+Same question. The semantic model gave a number. The ontology turned it into an explanation and an action.
+
+## How it comes together
+
+At a high level, and without getting into preview-specific clicks:
+
+1. **Model the analytics in Power BI.** Clean measures and relationships in your semantic model, the trusted numbers.
+2. **Generate and refine the ontology in Fabric IQ.** Bootstrap from that semantic model, then add the entity relationships, rules, and actions that reporting never needed.
+3. **Point a data agent at both.** It draws trusted numbers from the semantic model and business meaning from the ontology, grounded on your OneLake data.
+
+Start at step one with what you already trust, and add the next layer when your agents need to reason or act.
 
 ## Which one does your data agent actually need?
 
