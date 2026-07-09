@@ -77,24 +77,24 @@ const diagram = `
   <text x="80" y="103" fill="#9aa3bd" font-size="17" font-family="Segoe UI, Arial, sans-serif">Numbers you can trust, meaning agents can act on.</text>
 
   <!-- Consumers -->
-  ${card(80, 132, 460, 104, "#7c5cff", "Power BI reports", "trusted KPIs,", "interactive visuals")}
-  ${card(560, 132, 460, 104, "#22d3ee", "Data agents &amp; Copilot", "reason across concepts,", "take governed actions")}
+  ${card(90, 132, 390, 104, "#7c5cff", "Power BI reports", "trusted KPIs,", "interactive visuals")}
+  ${card(610, 132, 390, 104, "#22d3ee", "Data agents &amp; Copilot", "reason across concepts,", "take governed actions")}
 
-  ${upArrow(300, 300, 240)}
-  ${upArrow(800, 300, 240)}
+  ${upArrow(285, 300, 240)}
+  ${upArrow(805, 300, 240)}
 
   <!-- Models -->
-  ${card(80, 300, 405, 150, "#7c5cff", "Power BI semantic model", "measures, hierarchies, KPIs", "the analytics layer, answers about numbers")}
-  ${card(615, 300, 405, 150, "#22d3ee", "Ontology (preview)", "entities, relationships, rules, actions", "the meaning layer, cross-domain reasoning")}
+  ${card(90, 300, 390, 150, "#7c5cff", "Power BI semantic model", "measures, hierarchies, KPIs", "the analytics layer, answers about numbers")}
+  ${card(610, 300, 390, 150, "#22d3ee", "Ontology (preview)", "entities, relationships, rules, actions", "the meaning layer, cross-domain reasoning")}
 
-  <line x1="485" y1="375" x2="613" y2="375" stroke="#9aa3bd" stroke-width="2" marker-end="url(#right)"/>
-  <text x="549" y="362" fill="#9aa3bd" font-size="13" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif">generate / align</text>
+  <line x1="480" y1="375" x2="608" y2="375" stroke="#9aa3bd" stroke-width="2" marker-end="url(#right)"/>
+  <text x="544" y="362" fill="#9aa3bd" font-size="13" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif">generate / align</text>
 
-  ${upArrow(300, 560, 454)}
-  ${upArrow(800, 560, 454)}
+  ${upArrow(285, 560, 454)}
+  ${upArrow(805, 560, 454)}
 
   <!-- Foundation -->
-  ${band(80, 560, 940, 96, "#c084fc", "OneLake", "one unified, governed data foundation")}
+  ${band(90, 560, 910, 96, "#c084fc", "OneLake", "one unified, governed data foundation")}
 </svg>`;
 
 await sharp(Buffer.from(cover)).png().toFile(join(outDir, "cover.png"));
