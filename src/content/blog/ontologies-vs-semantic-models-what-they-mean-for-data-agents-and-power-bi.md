@@ -10,7 +10,7 @@ featured: true
 draft: false
 ---
 
-## Two words that are quietly confusing every data team
+## Ontology or semantic model: two words confusing every data team
 
 For a decade, the semantic model was the trusted heart of a Power BI solution. Then Microsoft introduced ontologies as part of [Fabric IQ](/blog/fabric-iq-fabric-data-agents-azure-ai-foundry-and-mcp-how-they-work-together), and a lot of data teams started asking the same question: is an ontology just a new name for a semantic model, is it a replacement, and what does it mean for the reports and data agents we are already building?
 
@@ -26,7 +26,7 @@ It defines:
 - **Hierarchies and dimensions** like date, region, and product
 - **Relationships** between tables, so one question fans out correctly
 
-Ask "what was revenue last quarter by region," and the model returns the same correct number no matter which report you open. That is its strength, and also its scope. A semantic model is built for analytics. It answers questions about **numbers**.
+Ask "what was revenue last quarter by region," and the model returns the same correct number no matter which report you open. That is its strength, and its scope: it is built for analytics, and it answers questions about **numbers**.
 
 ## What an ontology adds
 
@@ -34,14 +34,14 @@ An ontology works at a different level. Instead of measures and visuals, it capt
 
 It defines:
 
-- **Entity types**: what a Customer, an Order, a Shipment, or an Asset is
-- **Relationships**: a Shipment belongs to an Order, a Sensor is attached to a Shipment
-- **Properties and rules**: what governs each entity, like the threshold that defines a breach
+- **Entity types**: what a Customer, an Order, a Product, or a Store is
+- **Relationships**: an Order contains Products, a Product is stocked at a Store, a Store is served by a Supplier
+- **Properties and rules**: what governs each entity, like the reorder threshold that flags a stockout
 - **Actions**: what can be done, and how an agent can invoke it
 
-The difference shows up the moment a question spans concepts. A semantic model can tell you how many shipments were late. An ontology lets you **trace the chain**, Order to Shipment to Temperature Sensor to Cold Chain Breach, and explain why. That relationship-first reasoning is why Fabric IQ pairs the ontology with a graph that stores and traverses those connections.
+The difference shows up the moment a question spans concepts. A semantic model can tell you sales fell. An ontology lets you **trace the chain**, Product to Store to Inventory to Supplier, and explain why. That relationship-first reasoning is why Fabric IQ pairs the ontology with a graph that stores and traverses those connections.
 
-## Tables versus meaning
+## The distinction at a glance
 
 Your data lives in tables and schemas, structures built for machines. Businesses do not run on tables. They run on concepts: customers, assets, orders, breaches. The table below is the fastest way to see which layer handles which.
 
@@ -53,8 +53,8 @@ Your data lives in tables and schemas, structures built for machines. Businesses
 | **Models** | Measures, hierarchies, relationships | Entities, relationships, rules, actions |
 | **Optimized for** | Analytics and reporting | Meaning, reasoning, and action |
 | **Answers** | What are the numbers? | What do the concepts mean and how do they connect? |
-| **Consumed by** | Reports and dashboards | Data and operations agents, plus reports |
-| **Example** | Revenue last quarter by region | Trace an order to a cold-chain breach and explain it |
+| **Consumed by** | Reports and dashboards | Data and operations agents |
+| **Example** | Revenue last quarter by region | Trace a sales drop to a supplier stockout and explain it |
 
 ## They are not the same thing
 
@@ -89,16 +89,6 @@ Tracing that chain, the agent can say: revenue dropped because a promotion ended
 
 Same question. The semantic model gave a number. The ontology turned it into an explanation and an action.
 
-## How it comes together
-
-At a high level, and without getting into preview-specific clicks:
-
-1. **Model the analytics in Power BI.** Clean measures and relationships in your semantic model, the trusted numbers.
-2. **Generate and refine the ontology in Fabric IQ.** Bootstrap from that semantic model, then add the entity relationships, rules, and actions that reporting never needed.
-3. **Point a data agent at both.** It draws trusted numbers from the semantic model and business meaning from the ontology, grounded on your OneLake data.
-
-Start at step one with what you already trust, and add the next layer when your agents need to reason or act.
-
 ## Which one does your data agent actually need?
 
 Not every agent needs both. A quick way to decide:
@@ -108,6 +98,16 @@ Not every agent needs both. A quick way to decide:
 - **Both.** Most production agents land here. The semantic model supplies the trusted numbers, and the ontology supplies the shared meaning, relationships, and actions. Together they let an agent answer both "what happened" and "why, and what should we do about it."
 
 If you are not sure, start with the semantic model you already trust, then add an ontology once your agents start asking questions that cross concepts or need to take action.
+
+## How it comes together
+
+At a high level, and without getting into preview-specific clicks:
+
+1. **Model the analytics in Power BI.** Clean measures and relationships in your semantic model, the trusted numbers.
+2. **Generate and refine the ontology in Fabric IQ.** Bootstrap from that semantic model, then add the entity relationships, rules, and actions that reporting never needed.
+3. **Point a data agent at both.** It draws trusted numbers from the semantic model and business meaning from the ontology, grounded on your OneLake data.
+
+Start at step one with what you already trust, and add the next layer when your agents need to reason or act.
 
 ## What it means for Power BI
 
