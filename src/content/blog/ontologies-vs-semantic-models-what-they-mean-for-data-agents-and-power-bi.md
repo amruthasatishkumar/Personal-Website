@@ -56,9 +56,11 @@ Data lives in tables and schemas, structures built for machines. Businesses do n
 | **Consumed by** | Reports and dashboards | Data and operations agents, plus reports |
 | **Example** | Revenue last quarter by region | Trace an order to a cold-chain breach and explain it |
 
-## They are not rivals, they are layers
+## They are not the same thing
 
-This is the part most "X versus Y" framings get wrong. Semantic models and ontologies are designed to work together. In Fabric IQ, an ontology can be **generated directly from a Power BI semantic model** already in production, so your existing measures and business logic become the starting point, not throwaway work.
+This is the part most "X versus Y" framings get wrong. Semantic models and ontologies are not the same, and they are not competing. They are built to work together. You can bootstrap an ontology from a Power BI semantic model already in production, which reuses trusted definitions and business terminology so you are not starting from a blank page.
+
+One expectation to set, though: ontology is in preview, so generating from a semantic model gives you a starting point, not a full automatic import. The entity relationships, rules, and actions that make an ontology valuable are something you model on top. Do not expect your semantic model's table relationships to simply carry across.
 
 The payoff is consistency:
 
@@ -76,6 +78,16 @@ This is where it gets practical. A Fabric data agent is a virtual analyst that a
 - **Grounded in a semantic model and an ontology**, it starts with your business language built in: what a Customer is, how a Shipment relates to an Order, and which actions are valid.
 
 That grounding is the difference between an agent that produces plausible answers and one you can trust for decisions. It is also what lets operations agents move from "here is a number" to "here is an anomaly, and here is the governed action to take," because the ontology declares the rules and actions attached to each entity. You can even query the ontology in plain language, which turns a business question into a structured query rather than a guess.
+
+## Which one does your data agent actually need?
+
+Not every agent needs both. A quick way to decide:
+
+- **Semantic model only.** If your agent answers metric questions inside one well-modeled domain, like "what was revenue by region last quarter," a trusted semantic model may be all it needs. The questions are about numbers, and the relationships stay inside that model.
+- **Ontology, with a model underneath.** Reach for an ontology when questions span domains and relationships, like "why was this order delayed," when the agent has to follow business rules, or when an operations agent needs to act on live data. This is where cross-domain reasoning and governed actions live.
+- **Both.** Most production agents land here. The semantic model supplies the trusted numbers, and the ontology supplies the shared meaning, relationships, and actions. Together they let an agent answer both "what happened" and "why, and what should we do about it."
+
+If you are not sure, start with the semantic model you already trust, then add an ontology once your agents start asking questions that cross concepts or need to take action.
 
 ## What it means for Power BI
 
