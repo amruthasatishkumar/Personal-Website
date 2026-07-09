@@ -58,6 +58,8 @@ In a medallion setup:
 
 The semantic model should ideally sit on top of the Gold layer.
 
+![Medallion architecture with Bronze, Silver, and Gold layers feeding the Power BI semantic model, which feeds reports and dashboards](/images/blog/the-foundation-beneath-every-power-bi-report/medallion-semantic.png)
+
 If Power BI connects directly to raw or partially transformed data, the semantic model becomes overloaded. Developers start embedding transformation logic in DAX. Business definitions creep into report files. The boundary between storage and meaning becomes blurred.
 
 > If your Gold layer is unclear, your semantic model will compensate. And compensation leads to complexity.
