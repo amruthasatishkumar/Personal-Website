@@ -115,11 +115,11 @@ If you have invested years in Power BI semantic models, that work is not obsolet
 
 ## Where this is heading
 
-For a decade we modeled data so people could read it. The job now is modeling data so agents can reason over it, and that is a higher bar.
+For years, the question was simple: are my numbers right? Agents raise the stakes. The new question is whether your data means something a machine can act on, not just something a person can read.
 
-A report can lean on a human who already knows the business. An agent cannot, so the meaning has to live in the data itself. The semantic model makes your numbers trustworthy. The ontology makes your meaning trustworthy. Skip the second, and your agents will be confident and wrong.
+A semantic model gives you numbers you can trust. An ontology gives you meaning an agent can trust. Numbers make a report. Meaning makes an agent.
 
-So the real question is no longer "are my numbers right?" It is "does my data understand my business well enough for an agent to act on it?" That is the line between an agent that demos well and one you can put in front of a customer.
+Get only the numbers, and you will ship dashboards people rely on and agents that quietly guess. Get the meaning too, and you get the rare thing everyone is actually chasing: agents you can trust to act.
 
 ## Sources
 
