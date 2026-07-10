@@ -30,7 +30,7 @@ Because it honors existing permissions, an agent grounded in Work IQ only ever s
 
 ### Fabric IQ: structured business meaning, not just rows
 
-Fabric IQ lets agents query data agents and company ontologies. An ontology is a formal model of your business entities, their relationships, and the rules that connect them, linked to live data in OneLake through a specialized semantic layer.
+Fabric IQ lets agents query data agents and company [ontologies](/blog/ontologies-vs-semantic-models-what-they-mean-for-data-agents-and-power-bi). An ontology is a formal model of your business entities, their relationships, and the rules that connect them, linked to live data in OneLake through a specialized semantic layer.
 
 The important shift here is meaning. Instead of returning raw rows, Fabric IQ returns structured answers that respect how your business actually defines a customer, an order, or a margin, alongside the unstructured document context for the same question.
 
@@ -43,7 +43,7 @@ A few things make it production grade:
 - **Multi-source knowledge bases.** Ground agents across Work IQ, Fabric IQ, File Search, Azure SQL, and MCP through one knowledge base, with no custom integration work.
 - **Agentic retrieval.** Foundry IQ runs an iterative retrieval loop rather than a single lookup. Microsoft reports answer quality improvements of up to 20 percent across its evaluated datasets, and up to 54 percent better recall compared to single-shot retrieval augmented generation.
 - **Serverless and scale to zero.** Agent workloads are bursty, so the serverless tier scales to zero when idle and removes clusters and reserved capacity from the equation.
-- **An MCP server.** Foundry IQ exposes knowledge bases over the Model Context Protocol, so any compatible host can use them, including Microsoft Agent Framework, Claude, ChatGPT, and LangChain.
+- **An MCP server.** Foundry IQ exposes knowledge bases over the [Model Context Protocol](/blog/understanding-mcp-what-the-model-context-protocol-actually-does), so any compatible host can use them, including Microsoft Agent Framework, Claude, ChatGPT, and LangChain.
 
 ### Web IQ: grounded access to the open web
 
@@ -55,7 +55,7 @@ Combined with Foundry IQ, an agent can plan, search, reason, and synthesize an a
 
 The most interesting part of Microsoft IQ is not retrieval quality. It is that security lives at the data layer rather than being approximated in application code.
 
-Permissions follow the content into the agent. Microsoft Purview sensitivity labels are surfaced inside knowledge sources, so label-based access controls are honored end to end, and SharePoint permissions sync incrementally as they change. For a regulated enterprise, that is the difference between a demo and something you can actually ship.
+Permissions follow the content into the agent. [Microsoft Purview](/blog/data-governance-with-microsoft-purview) sensitivity labels are surfaced inside knowledge sources, so label-based access controls are honored end to end, and SharePoint permissions sync incrementally as they change. For a regulated enterprise, that is the difference between a demo and something you can actually ship.
 
 ## A simple mental model
 
