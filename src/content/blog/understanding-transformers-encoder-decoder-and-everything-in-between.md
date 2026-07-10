@@ -1,5 +1,5 @@
 ---
-title: "Understanding Transformers : Encoder, Decoder, and Everything In Between"
+title: "Understanding Transformers: Encoder, Decoder, and Everything In Between"
 description: "Encoder-only, decoder-only, and encoder-decoder Transformers explained, and how models like BERT, GPT, and T5 map to each, with plain-language intuition."
 pubDate: 2026-02-20
 category: "AI"
@@ -104,4 +104,4 @@ And when you look closely, that’s exactly what a Transformer does only faster,
 
 I’m only scratching the surface here, but understanding this foundation suddenly makes the rest of AI feel a lot less abstract. Every new model I read about GPT, T5, Whisper now feels like a variation on a theme I finally understand.
 
-**_Next up, I’ll be diving into the attention mechanism the real magic that lets Transformers decide what to focus on. From what I can tell, that’s where things start getting really interesting._**
+**_Next up, I’ll be diving into the [attention mechanism](/blog/attention-mechanism-the-secret-behind-how-transformers-think), the real magic that lets Transformers decide what to focus on. From what I can tell, that’s where things start getting really interesting._**

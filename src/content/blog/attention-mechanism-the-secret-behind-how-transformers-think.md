@@ -1,5 +1,5 @@
 ---
-title: "Attention Mechanism : The Secret Behind How Transformers Think"
+title: "Attention Mechanism: The Secret Behind How Transformers Think"
 description: "How the attention mechanism lets a Transformer weigh every word against every other word to build context, explained with a simple queries, keys, and values analogy."
 pubDate: 2026-02-20
 category: "AI"
@@ -13,7 +13,7 @@ draft: false
 
 The real reason they work so well comes down to one mechanism: attention.
 
-If Transformers are the _brain_ of AI, the **attention mechanism** is the _thought process_ that makes them intelligent. It’s the part that decides for every single word and identify what’s important, what’s not, and how everything connects.
+If Transformers are the _brain_ of AI, the **attention mechanism** is the _thought process_ that makes them intelligent. It’s the part that, for every single word, identifies what’s important, what’s not, and how everything connects.
 
 And the more I learned, the more it clicked: Attention isn’t just one feature _inside_ Transformers. It _is_ what defines the Transformer.
 

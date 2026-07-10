@@ -1,5 +1,5 @@
 ---
-title: "Positional Encoding : Teaching Transformers the Concept of Order"
+title: "Positional Encoding: Teaching Transformers the Concept of Order"
 description: "Transformers read every word at once, so how do they track word order? A clear look at how sine and cosine positional encoding teaches sequence to a Transformer."
 pubDate: 2026-02-20
 category: "AI"

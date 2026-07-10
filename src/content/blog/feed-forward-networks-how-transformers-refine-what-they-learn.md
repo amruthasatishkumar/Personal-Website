@@ -9,7 +9,7 @@ readTime: "3 min"
 featured: false
 draft: false
 ---
-The most talked-about pieces of the Transformer architecture are Attention, Positional Encoding, and Multi-Head Attention.
+The most talked-about pieces of the Transformer architecture are [Attention](/blog/attention-mechanism-the-secret-behind-how-transformers-think), [Positional Encoding](/blog/positional-encoding-teaching-transformers-the-concept-of-order), and [Multi-Head Attention](/blog/multi-head-attention-how-transformers-think-in-parallel).
 
 Each of these mechanisms helps a Transformer understand _relationships, structure, and meaning_. But there is one final piece that often goes unnoticed, yet plays a crucial role:
 

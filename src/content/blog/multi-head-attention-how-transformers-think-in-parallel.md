@@ -9,7 +9,7 @@ readTime: "3 min"
 featured: false
 draft: false
 ---
-**Positional Encoding** gives Transformers a sense of order. But what makes them truly powerful is something else:
+**[Positional Encoding](/blog/positional-encoding-teaching-transformers-the-concept-of-order)** gives Transformers a sense of order. But what makes them truly powerful is something else:
 
 **Multi-Head Attention.**
 

@@ -49,7 +49,7 @@ Managing sensitive data is genuinely difficult at scale, for a few reasons:
 
 Without classification and context, every security decision becomes reactive.
 
-> That’s where **Microsoft Purview**’s approach begins.
+> That’s where **[Microsoft Purview](/blog/microsoft-purview-classifying-and-protecting-data-at-scale)**’s approach begins.
 
 ## **Protecting Data in a Zero Trust World**
 
@@ -66,7 +66,7 @@ In the context of data protection, this means:
 -   Enforcing protection regardless of where the data travels
     
 
-> Zero Trust isn’t just about access it’s about data awareness.
+> Zero Trust isn’t just about access, it’s about data awareness.
 
 ## **Understanding Data Classification and Protection**
 

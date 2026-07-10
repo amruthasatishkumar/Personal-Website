@@ -1,6 +1,6 @@
 ---
 title: "Fabric Data Agents and Claude"
-description: "What Happens When Governed Data Meets Advanced Reasoning"
+description: "How Fabric Data Agents let a model like Claude answer questions over enterprise data in natural language, while the semantic model keeps every answer governed and consistent."
 pubDate: 2026-02-20
 category: "Data"
 tags: ["Data", "AI", "Fabric", "Agents"]
@@ -9,7 +9,7 @@ readTime: "4 min"
 featured: true
 draft: false
 ---
-![](/images/blog/fabric-data-agents-and-claude/img-1.png)
+![Fabric Data Agents pairing a governed semantic model with a reasoning model like Claude](/images/blog/fabric-data-agents-and-claude/img-1.png)
 
 For years, we have treated AI and data platforms as two separate conversations.
 
@@ -23,7 +23,7 @@ But underneath, it was often fragile.
 
 Database schemas reflect storage design, not business meaning. Metric definitions are often embedded in transformations. Security policies can be layered in ways that are not visible at query time. A model might produce technically valid SQL while still misrepresenting how revenue or churn is defined.
 
-That is where the integration between Microsoft Fabric Data Agents and models like Claude changes the pattern.
+That is where the integration between Microsoft [Fabric Data Agents](/blog/fabric-iq-fabric-data-agents-azure-ai-foundry-and-mcp-how-they-work-together) and models like Claude changes the pattern.
 
 ```
 It does not simply attach AI to data.
@@ -36,7 +36,7 @@ Fabric Data Agents allow users to ask questions about enterprise data in natural
 
 What matters more is where the reasoning happens.
 
-Instead of generating queries directly against raw lakehouse tables, the agent operates over the semantic model. This semantic layer already contains defined relationships, approved measures, curated KPIs, and enforced row level security.
+Instead of generating queries directly against raw lakehouse tables, the agent operates over the [semantic model](/blog/the-foundation-beneath-every-power-bi-report). This semantic layer already contains defined relationships, approved measures, curated KPIs, and enforced row-level security.
 
 > “The agent is not querying tables. It is querying meaning.”
 
@@ -48,9 +48,9 @@ That architectural boundary makes the difference between a demo and a dependable
 
 ## Where Claude Fits In
 
-Claude’s strength lies in interpreting intent and handling ambiguity. It can follow multi step reasoning, maintain context across a conversation, and translate loosely framed questions into structured analytical requests.
+Claude’s strength lies in interpreting intent and handling ambiguity. It can follow multi-step reasoning, maintain context across a conversation, and translate loosely framed questions into structured analytical requests.
 
-Within Fabric Data Agents, Claude plays the role of interpreter and reasoning engine. It helps map natural language into analytical intent. It can refine follow up questions and explain results clearly.
+Within Fabric Data Agents, Claude plays the role of interpreter and reasoning engine. It helps map natural language into analytical intent. It can refine follow-up questions and explain results clearly.
 
 But it does not redefine business metrics. It does not change how revenue is calculated. It does not override churn definitions or bypass governance.
 
@@ -84,13 +84,13 @@ Language models amplify whatever foundation exists.
 
 > “AI does not fix structural problems. It exposes them.”
 
-In this architecture, the semantic model becomes the intelligence layer. It defines what the system is allowed to mean. Claude helps interpret user intent, but business logic remains encoded in structured definitions.
+In this architecture, the [semantic model](/blog/ontologies-vs-semantic-models-what-they-mean-for-data-agents-and-power-bi) becomes the intelligence layer. It defines what the system is allowed to mean. Claude helps interpret user intent, but business logic remains encoded in structured definitions.
 
 For data teams, this makes semantic design not just a reporting concern, but a prerequisite for reliable AI interaction.
 
 ## What This Enables
 
-Fabric Data Agents integrated with Claude allow business users to explore governed data conversationally. They can ask follow up questions, request clarifications, and receive explanations without writing SQL or navigating complex dashboards.
+Fabric Data Agents integrated with Claude allow business users to explore governed data conversationally. They can ask follow-up questions, request clarifications, and receive explanations without writing SQL or navigating complex dashboards.
 
 At the same time, the answers remain aligned with defined business logic. Security policies are respected. Metric definitions are consistent.
 
