@@ -11,13 +11,11 @@ draft: false
 ---
 ## Introduction
 
-The Model Context Protocol (MCP) is an open standard that allows AI agents to securely connect to external tools, data sources, and enterprise systems. As agent based architectures become more common, understanding what MCP actually does and when it is needed has become increasingly important for modern data and AI teams.
+The Model Context Protocol (MCP) is an open standard that allows AI agents to securely connect to external tools, data sources, and enterprise systems. As agent-based architectures become more common, understanding what MCP actually does and when it is needed has become increasingly important for modern data and AI teams.
 
-At first glance, MCP can look like just another integration layer. But in practice, it introduces a structured and governed way for AI systems to discover tools, request context, and execute actions safely. This shift is subtle but powerful, especially as organizations move from experimental copilots toward production grade AI agents.
+At first glance, MCP can look like just another integration layer. But in practice, it introduces a structured and governed way for AI systems to discover tools, request context, and execute actions safely. This shift is subtle but powerful, especially as organizations move from experimental copilots toward production-grade AI agents.
 
 In this article, we break down what MCP is, how it works, where it fits in modern architectures, and when teams truly need it.
-
-* * *
 
 ## What Is the Model Context Protocol
 
@@ -34,11 +32,9 @@ Through MCP, tools expose structured schemas that describe:
 -   how it should be invoked
     
 
-This allows AI agents to reason over available capabilities instead of relying on brittle, hard coded integrations.
+This allows AI agents to reason over available capabilities instead of relying on brittle, hard-coded integrations.
 
 At a high level, MCP introduces predictability and governance into agent behavior.
-
-* * *
 
 ## Why MCP Matters for AI Agents
 
@@ -55,7 +51,7 @@ Without a structured protocol, agents may:
 -   behave unpredictably across environments
     
 
-MCP addresses these concerns by introducing a formal interaction loop between the model and external tools. Each tool call becomes intentional, observable, and schema validated.
+MCP addresses these concerns by introducing a formal interaction loop between the model and external tools. Each tool call becomes intentional, observable, and schema-validated.
 
 For enterprise environments, this is especially important because AI systems must respect:
 
@@ -68,9 +64,7 @@ For enterprise environments, this is especially important because AI systems mus
 -   audit requirements
     
 
-When implemented correctly, MCP helps move agent systems from experimental demos toward production ready architectures.
-
-* * *
+When implemented correctly, MCP helps move agent systems from experimental demos toward production-ready architectures.
 
 ## How MCP Works in AI Systems
 
@@ -99,21 +93,19 @@ If a tool is needed, the model generates a structured MCP call that conforms to 
 
 ### Step 4: Tool Execution
 
-The MCP server executes the tool against the underlying system. This could involve querying a semantic model, retrieving governed data, or triggering a workflow.
+The MCP server executes the tool against the underlying system. This could involve querying a [semantic model](/blog/the-foundation-beneath-every-power-bi-report), retrieving governed data, or triggering a workflow.
 
 ### Step 5: Response Grounding
 
 The tool returns structured results to the model. The reasoning system incorporates this grounded information into the final response.
 
-This closed loop is what makes MCP based systems more reliable at scale.
-
-* * *
+This closed loop is what makes MCP-based systems more reliable at scale.
 
 ## MCP vs Traditional API Integrations
 
 Many teams initially assume MCP is simply another API wrapper. The difference is deeper.
 
-Traditional integrations are developer driven. MCP interactions are model mediated.
+Traditional integrations are developer-driven. MCP interactions are model-mediated.
 
 In traditional systems:
 
@@ -124,7 +116,7 @@ In traditional systems:
 -   observability is fragmented
     
 
-In MCP based systems:
+In MCP-based systems:
 
 -   tools are declarative
     
@@ -136,8 +128,6 @@ In MCP based systems:
     
 
 This shift enables more dynamic and scalable agent architectures.
-
-* * *
 
 ## When You Do and Do Not Need MCP
 
@@ -165,9 +155,7 @@ You may not need MCP when:
 -   the platform tightly governs execution
     
 
-For example, in environments where AI operates directly over a well modeled semantic layer, some use cases can function effectively without introducing a full MCP layer.
-
-* * *
+For example, in environments where AI operates directly over a well-modeled [semantic layer](/blog/fabric-iq-fabric-data-agents-azure-ai-foundry-and-mcp-how-they-work-together), some use cases can function effectively without introducing a full MCP layer.
 
 ## Where MCP Fits in Modern Data Architectures
 
@@ -188,15 +176,20 @@ In this architecture:
 -   semantic models ensure metric consistency
     
 
-When these layers are aligned, agent systems become significantly more predictable and enterprise ready.
-
-If you want to understand the execution pattern in more depth, see the detailed breakdown of MCP Flow.
-
-* * *
+When these layers are aligned, agent systems become significantly more predictable and enterprise-ready.
 
 ## Common Mistakes Teams Make with MCP
 
-As adoption grows, several patterns appear repeatedly.
+As adoption grows, several patterns appear repeatedly:
+
+-   **Treating MCP as an API wrapper.** The value is the model reasoning over declared capabilities, not just a new way to call an endpoint. Wrap without the schema discipline and you lose the point.
+-   **Skipping governance at the tool layer.** MCP is where permissions and auditability should live. Bolting them on later reintroduces the risks MCP was meant to remove.
+-   **Adding MCP where it is not needed.** For a single, well-governed data source with strong semantic grounding, a full MCP layer can be overhead. Reach for it when reasoning and execution cross boundaries.
+-   **Under-specifying tool schemas.** Vague inputs and outputs make the model guess. Clear, strict schemas are what make tool calls predictable.
+
+## Closing Thought
+
+MCP is not intelligence. It is discipline. It gives agents a structured, governed way to reach the tools and data they need, so the smarter the model gets, the safer its actions stay. Adopt it where reasoning and execution live in different systems, and keep it out of the places a well-governed semantic layer already covers.
 
 **Treating MCP as just another API wrapper**  
 This misses the governance and discovery benefits.
@@ -212,15 +205,11 @@ The power of MCP comes from traceability. Without it, teams lose a major advanta
 
 Avoiding these pitfalls significantly improves early implementations.
 
-* * *
-
 ## Final Thoughts
 
 The Model Context Protocol represents an important step toward more structured and governed AI systems. As organizations move beyond experimentation, the focus is shifting from raw model capability toward safe and reliable execution.
 
 Understanding when MCP adds real value and when simpler patterns are sufficient is what separates experimental agent prototypes from resilient enterprise AI architectures.
-
-* * *
 
 ## 🔍 FAQ Section
 
