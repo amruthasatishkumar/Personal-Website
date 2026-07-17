@@ -1,0 +1,136 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site";
+
+export async function getStaticPaths() {
+  const courses = await getCollection("courses", ({ data }) => !data.draft);
+  const lessons = await getCollection("lessons", ({ data }) => !data.draft);
+
+  return lessons.map((lesson) => {
+    const course = courses.find((c) => c.data.slug === lesson.data.course);
+    const siblings = lessons
+      .filter((l) => l.data.course === lesson.data.course)
+      .sort((a, b) => a.data.order - b.data.order);
+    const idx = siblings.findIndex((l) => l.id === lesson.id);
+    return {
+      params: { course: lesson.data.course, lesson: lesson.data.slug },
+      props: {
+        lesson,
+        course,
+        prev: idx > 0 ? siblings[idx - 1] : null,
+        next: idx < siblings.length - 1 ? siblings[idx + 1] : null,
+        position: idx + 1,
+        total: siblings.length,
+      },
+    };
+  });
+}
+
+const { lesson, course, prev, next, position, total } = Astro.props;
+const { Content } = await render(lesson);
+
+const courseTitle = course?.data.title ?? "Course";
+const courseSlug = lesson.data.course;
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Courses", item: new URL("/learn", site.url).href },
+    { "@type": "ListItem", position: 2, name: courseTitle, item: new URL(`/learn/${courseSlug}`, site.url).href },
+    { "@type": "ListItem", position: 3, name: lesson.data.title, item: new URL(`/learn/${courseSlug}/${lesson.data.slug}`, site.url).href },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${lesson.data.title} · ${courseTitle}`}
+  description={lesson.data.summary}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} is:inline />
+
+  <article class="mx-auto max-w-3xl px-4 pt-14 sm:pt-20">
+    <nav class="text-sm text-[var(--text-muted)]">
+      <a href="/learn" class="hover:text-[var(--text)]">Courses</a>
+      <span class="px-1 text-[var(--text-faint)]">/</span>
+      <a href={`/learn/${courseSlug}`} class="hover:text-[var(--text)]">{courseTitle}</a>
+    </nav>
+
+    <header class="mt-6">
+      <p class="eyebrow">Lesson {position} of {total} · {lesson.data.readTime}</p>
+      <h1 class="mt-3 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+        {lesson.data.title}
+      </h1>
+    </header>
+
+    <div class="prose-glass mt-8">
+      <Content />
+    </div>
+
+    <div class="mt-12 flex flex-col gap-3 border-t border-[rgb(var(--surface)/0.12)] pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <button
+        type="button"
+        data-complete
+        data-course={courseSlug}
+        data-lesson={lesson.data.slug}
+        class="btn-ghost"
+      >
+        Mark as done
+      </button>
+      {next ? (
+        <a href={`/learn/${courseSlug}/${next.data.slug}`} class="btn-primary text-center">
+          Next: {next.data.title} →
+        </a>
+      ) : (
+        <a href={`/learn/${courseSlug}`} class="btn-primary text-center">Finish course ✓</a>
+      )}
+    </div>
+
+    <div class="mt-6 flex flex-wrap justify-between gap-x-6 gap-y-2 text-sm">
+      {prev ? (
+        <a href={`/learn/${courseSlug}/${prev.data.slug}`} class="text-[var(--text-muted)] hover:text-[var(--text)]">
+          ← {prev.data.title}
+        </a>
+      ) : <span></span>}
+      <a href={`/learn/${courseSlug}`} class="text-[var(--text-muted)] hover:text-[var(--text)]">All lessons</a>
+    </div>
+  </article>
+
+  <script>
+    const btn = document.querySelector<HTMLButtonElement>("[data-complete]");
+    if (btn) {
+      const courseSlug = btn.dataset.course!;
+      const lessonSlug = btn.dataset.lesson!;
+      const doneKey = `course:${courseSlug}:done`;
+      const enrollKey = `course:${courseSlug}:enrolled`;
+
+      const read = (): string[] => {
+        try {
+          return JSON.parse(localStorage.getItem(doneKey) || "[]");
+        } catch {
+          return [];
+        }
+      };
+
+      const sync = () => {
+        const done = read();
+        const isDone = done.includes(lessonSlug);
+        btn.textContent = isDone ? "Done ✓" : "Mark as done";
+        btn.classList.toggle("is-done", isDone);
+      };
+
+      btn.addEventListener("click", () => {
+        localStorage.setItem(enrollKey, "1");
+        const done = read();
+        const i = done.indexOf(lessonSlug);
+        if (i === -1) done.push(lessonSlug);
+        else done.splice(i, 1);
+        localStorage.setItem(doneKey, JSON.stringify(done));
+        sync();
+      });
+
+      sync();
+    }
+  </script>
+</BaseLayout>

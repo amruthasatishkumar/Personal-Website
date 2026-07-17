@@ -1,0 +1,106 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const courses = (await getCollection("courses", ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const lessons = await getCollection("lessons", ({ data }) => !data.draft);
+const lessonCount = (courseSlug: string) =>
+  lessons.filter((l) => l.data.course === courseSlug).length;
+---
+
+<BaseLayout
+  title="Courses"
+  description="Free, outcome-based courses on Microsoft Fabric and the modern data and AI stack. Real-world problems, explained clearly, from someone who does this for a living."
+>
+  <section class="mx-auto max-w-5xl px-4 pt-16 sm:pt-24">
+    <div class="reveal">
+      <p class="eyebrow">Courses</p>
+      <h1 class="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        Learn data and AI by <span class="text-gradient">solving real problems</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-12 max-w-5xl px-4">
+    {courses.length === 0 ? (
+      <p class="text-[var(--text-muted)]">Courses are on the way. Check back soon.</p>
+    ) : (
+      <div class="grid gap-5 sm:grid-cols-2">
+        {courses.map((c) => (
+          <a
+            href={`/learn/${c.data.slug}`}
+            data-course-card
+            data-course={c.data.slug}
+            data-total={lessonCount(c.data.slug)}
+            class="glass reveal group flex flex-col overflow-hidden rounded-2xl transition hover:-translate-y-1"
+          >
+            {c.data.cover && (
+              <div class="aspect-[16/9] overflow-hidden">
+                <img src={c.data.cover} alt={c.data.title} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+              </div>
+            )}
+            <div class="flex flex-1 flex-col p-6">
+              <p class="text-xs uppercase tracking-wide text-[var(--text-faint)]">
+                {c.data.level} · {lessonCount(c.data.slug)} lessons{c.data.track ? ` · ${c.data.track}` : ""}
+              </p>
+              <h2 class="mt-2 font-display text-xl font-bold leading-snug">{c.data.title}</h2>
+              {c.data.outcome && (
+                <p class="mt-3 text-sm text-[var(--text-muted)]">{c.data.outcome}</p>
+              )}
+              <p data-card-progress class="mt-3 hidden text-xs font-semibold text-gradient"></p>
+              <div class="mt-auto flex items-center justify-between pt-5">
+                <span class="text-xs font-semibold text-[var(--text-faint)]">
+                  {c.data.access === "free" ? "Free" : "Premium"}
+                </span>
+                <span data-card-cta class="text-sm font-semibold text-gradient">Start →</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <section class="mx-auto mt-16 max-w-5xl px-4">
+    <div class="glass rounded-2xl p-6 text-sm leading-relaxed text-[var(--text-faint)]">
+      <p class="font-semibold text-[var(--text-muted)]">Disclaimer</p>
+      <p class="mt-2">
+        These courses are independent, personal educational content. They are not
+        affiliated with, endorsed by, or sponsored by Microsoft or any other
+        company, and the views expressed are my own, not those of my employer.
+        The material is provided as-is for learning purposes, without any warranty,
+        and product features and pricing change often, so always confirm the
+        current details in official documentation before making decisions.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Reflect per-course enroll + progress from localStorage on each card.
+    document.querySelectorAll<HTMLElement>("[data-course-card]").forEach((card) => {
+      const slug = card.dataset.course!;
+      const total = Number(card.dataset.total || "0");
+      const enrolled = localStorage.getItem(`course:${slug}:enrolled`) === "1";
+      let done: string[] = [];
+      try {
+        done = JSON.parse(localStorage.getItem(`course:${slug}:done`) || "[]");
+      } catch {
+        done = [];
+      }
+
+      const cta = card.querySelector<HTMLElement>("[data-card-cta]");
+      const progress = card.querySelector<HTMLElement>("[data-card-progress]");
+
+      if (enrolled || done.length > 0) {
+        if (cta) cta.textContent = "Continue →";
+      }
+      if (progress && total > 0 && (done.length > 0 || enrolled)) {
+        progress.textContent = `${done.length} of ${total} lessons done`;
+        progress.classList.remove("hidden");
+      }
+    });
+  </script>
+</BaseLayout>
