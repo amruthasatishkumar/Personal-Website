@@ -243,6 +243,30 @@
     box-shadow: 0 14px 34px -8px color-mix(in oklab, var(--accent) 80%, transparent);
   }
 
+  /* Completed state (course done) */
+  .btn-complete {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 999px;
+    color: #fff;
+    background: linear-gradient(100deg, #10b981, #059669);
+    box-shadow: 0 8px 24px -8px color-mix(in oklab, #10b981 70%, transparent);
+    transition: transform 0.25s var(--ease-smooth), filter 0.25s var(--ease-smooth);
+  }
+  .btn-complete:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+  }
+  .text-complete {
+    color: #10b981;
+  }
+
   /* Ghost / glass button */
   .btn-ghost {
     display: inline-flex;

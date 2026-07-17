@@ -93,13 +93,28 @@ const lessonCount = (courseSlug: string) =>
 
       const cta = card.querySelector<HTMLElement>("[data-card-cta]");
       const progress = card.querySelector<HTMLElement>("[data-card-progress]");
+      const completed =
+        localStorage.getItem(`course:${slug}:completed`) === "1" ||
+        (total > 0 && done.length >= total);
 
-      if (enrolled || done.length > 0) {
+      if (completed) {
+        if (cta) {
+          cta.textContent = "Completed ✓";
+          cta.classList.remove("text-gradient");
+          cta.classList.add("text-complete");
+        }
+        if (progress) {
+          progress.textContent = "✓ Course completed";
+          progress.classList.remove("text-gradient");
+          progress.classList.add("text-complete");
+          progress.classList.remove("hidden");
+        }
+      } else if (enrolled || done.length > 0) {
         if (cta) cta.textContent = "Continue →";
-      }
-      if (progress && total > 0 && (done.length > 0 || enrolled)) {
-        progress.textContent = `${done.length} of ${total} lessons done`;
-        progress.classList.remove("hidden");
+        if (progress && total > 0) {
+          progress.textContent = `${done.length} of ${total} lessons done`;
+          progress.classList.remove("hidden");
+        }
       }
     });
   </script>

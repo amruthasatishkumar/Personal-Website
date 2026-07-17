@@ -173,12 +173,31 @@ const courseSchema = {
       const label = document.querySelector<HTMLElement>("[data-progress-label]");
       const total = rows.length;
       const enrolled = localStorage.getItem(enrollKey) === "1";
+      const completed =
+        localStorage.getItem(`course:${courseSlug}:completed`) === "1" ||
+        (total > 0 && done.length >= total);
       const btn = document.querySelector<HTMLElement>("[data-enroll]");
-      if (btn) btn.textContent = enrolled ? "Continue course" : "Start course";
+      if (btn) {
+        if (completed) {
+          btn.textContent = "Completed ✓";
+          btn.classList.remove("btn-primary");
+          btn.classList.add("btn-complete");
+        } else {
+          btn.textContent = enrolled ? "Continue course" : "Start course";
+        }
+      }
       if (label) {
-        if (done.length > 0) label.textContent = `${done.length} of ${total} lessons done`;
-        else if (enrolled) label.textContent = "Enrolled · no lessons finished yet";
-        else label.textContent = "Free · no signup, progress saves on this device";
+        if (completed) {
+          label.textContent = "✓ Course completed";
+          label.classList.add("text-complete");
+          label.classList.remove("text-[var(--text-faint)]");
+        } else if (done.length > 0) {
+          label.textContent = `${done.length} of ${total} lessons done`;
+        } else if (enrolled) {
+          label.textContent = "Enrolled · no lessons finished yet";
+        } else {
+          label.textContent = "Free · no signup, progress saves on this device";
+        }
       }
     };
 

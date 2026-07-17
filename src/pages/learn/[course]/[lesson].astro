@@ -83,7 +83,7 @@ const breadcrumb = {
           Next: {next.data.title} →
         </a>
       ) : (
-        <a href={`/learn/${courseSlug}`} class="btn-primary text-center">Finish course ✓</a>
+        <a href={`/learn/${courseSlug}`} data-finish data-course={courseSlug} data-lesson={lesson.data.slug} class="btn-complete text-center">Finish course ✓</a>
       )}
     </div>
 
@@ -131,6 +131,29 @@ const breadcrumb = {
       });
 
       sync();
+    }
+
+    // Finish course: mark the final lesson done and flag the course completed,
+    // then let the link navigate back to the course hub (which shows "Completed").
+    const finish = document.querySelector<HTMLAnchorElement>("[data-finish]");
+    if (finish) {
+      finish.addEventListener("click", () => {
+        const courseSlug = finish.dataset.course!;
+        const lessonSlug = finish.dataset.lesson!;
+        const doneKey = `course:${courseSlug}:done`;
+        localStorage.setItem(`course:${courseSlug}:enrolled`, "1");
+        localStorage.setItem(`course:${courseSlug}:completed`, "1");
+        let done: string[] = [];
+        try {
+          done = JSON.parse(localStorage.getItem(doneKey) || "[]");
+        } catch {
+          done = [];
+        }
+        if (!done.includes(lessonSlug)) {
+          done.push(lessonSlug);
+          localStorage.setItem(doneKey, JSON.stringify(done));
+        }
+      });
     }
   </script>
 </BaseLayout>
