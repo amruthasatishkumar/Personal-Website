@@ -1,7 +1,7 @@
 ---
 course: "modernizing-data-estate-with-fabric"
 slug: "landing-your-data"
-title: "Landing Your Data: Picking the Right Ingestion Pattern"
+title: "Landing Your Data"
 summary: "Pipelines, Dataflows Gen2, or shortcuts? Learn which ingestion pattern fits each source so you bring data in cleanly instead of copying chaos."
 order: 3
 readTime: "9 min"

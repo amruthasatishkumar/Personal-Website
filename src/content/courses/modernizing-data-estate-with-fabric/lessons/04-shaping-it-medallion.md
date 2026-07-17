@@ -1,7 +1,7 @@
 ---
 course: "modernizing-data-estate-with-fabric"
 slug: "shaping-it-medallion"
-title: "Shaping It: The Medallion Approach Without the Buzzwords"
+title: "Shaping It: The Medallion Approach"
 summary: "Bronze, silver, gold sounds like jargon. It is really just three honest stages of trust. Here is what each layer is for and how to build them."
 order: 4
 readTime: "8 min"

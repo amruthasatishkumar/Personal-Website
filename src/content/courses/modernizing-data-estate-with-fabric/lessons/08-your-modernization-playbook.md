@@ -1,7 +1,7 @@
 ---
 course: "modernizing-data-estate-with-fabric"
 slug: "your-modernization-playbook"
-title: "Your Modernization Playbook, and What's Next"
+title: "Your Modernization Playbook"
 summary: "The whole journey compressed into a repeatable checklist you can run on any estate, plus where to go from here."
 order: 8
 readTime: "6 min"

@@ -1,7 +1,7 @@
 ---
 course: "modernizing-data-estate-with-fabric"
 slug: "serving-it-direct-lake-vs-warehouse"
-title: "Serving It: Direct Lake, and When to Use a Warehouse Instead"
+title: "Serving It: Direct Lake vs Warehouse"
 summary: "How to get your gold data in front of people without another copy. What Direct Lake really does, and the honest test for Lakehouse vs Warehouse."
 order: 5
 readTime: "9 min"
