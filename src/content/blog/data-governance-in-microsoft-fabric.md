@@ -1,6 +1,6 @@
 ---
 title: "Data Governance in Microsoft Fabric: A Practical Framework"
-description: "How to govern data in Microsoft Fabric using domains, the OneLake catalog, sensitivity labels, lineage, and Microsoft Purview, organized into a simple framework you can actually run."
+description: "Govern data in Microsoft Fabric with domains, the OneLake catalog, sensitivity labels, lineage, and Purview, in a simple framework you can run."
 pubDate: 2026-07-22
 category: "Data"
 tags: ["Data", "Governance", "Fabric", "OneLake", "Purview"]
