@@ -103,7 +103,8 @@ If you run data on Fabric today, the question is no longer only "what data do we
 
 This post is based on Microsoft's public documentation:
 
-- Governance and compliance in Microsoft Fabric (Microsoft Learn)
-- Domains in Microsoft Fabric (Microsoft Learn)
-- OneLake catalog overview (Microsoft Learn)
-- Information Protection and Data Loss Prevention for Microsoft Fabric, and Use Microsoft Purview to govern Microsoft Fabric (Microsoft Learn)
+- [Governance and compliance in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/governance/governance-compliance-overview) (Microsoft Learn)
+- [Domains in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/governance/domains) (Microsoft Learn)
+- [OneLake catalog overview](https://learn.microsoft.com/en-us/fabric/governance/onelake-catalog-overview) (Microsoft Learn)
+- [Information protection in Fabric](https://learn.microsoft.com/en-us/fabric/governance/information-protection) (Microsoft Learn)
+- [Use Microsoft Purview to govern Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/governance/microsoft-purview-fabric) (Microsoft Learn)
