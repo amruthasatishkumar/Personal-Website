@@ -124,8 +124,13 @@ const breadcrumb = {
         localStorage.setItem(enrollKey, "1");
         const done = read();
         const i = done.indexOf(lessonSlug);
-        if (i === -1) done.push(lessonSlug);
-        else done.splice(i, 1);
+        if (i === -1) {
+          done.push(lessonSlug);
+        } else {
+          done.splice(i, 1);
+          // Un-marking a lesson also clears the course-completed flag.
+          localStorage.removeItem(`course:${courseSlug}:completed`);
+        }
         localStorage.setItem(doneKey, JSON.stringify(done));
         sync();
       });

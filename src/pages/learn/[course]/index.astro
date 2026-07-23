@@ -82,6 +82,13 @@ const courseSchema = {
           Start course
         </button>
         <span data-progress-label class="text-sm text-[var(--text-faint)]"></span>
+        <button
+          type="button"
+          data-reset
+          class="hidden text-sm text-[var(--text-faint)] underline underline-offset-4 hover:text-[var(--text)]"
+        >
+          Reset progress
+        </button>
       </div>
     </header>
 
@@ -127,6 +134,7 @@ const courseSchema = {
           >
             <span
               data-lesson-check
+              data-index={i + 1}
               class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[rgb(var(--surface)/0.18)] text-sm font-semibold text-[var(--text-faint)]"
             >
               {i + 1}
@@ -150,6 +158,7 @@ const courseSchema = {
     const courseSlug = list?.dataset.course ?? "";
     const enrollKey = `course:${courseSlug}:enrolled`;
     const doneKey = `course:${courseSlug}:done`;
+    const completedKey = `course:${courseSlug}:completed`;
 
     const readDone = (): string[] => {
       try {
@@ -165,16 +174,21 @@ const courseSchema = {
       rows.forEach((row) => {
         const slug = row.dataset.lessonSlug!;
         const badge = row.querySelector<HTMLElement>("[data-lesson-check]");
-        if (badge && done.includes(slug)) {
+        if (!badge) return;
+        if (done.includes(slug)) {
           badge.textContent = "✓";
           badge.classList.add("text-gradient");
+        } else {
+          // Restore the original number so undo/reset repaints correctly.
+          badge.textContent = badge.dataset.index ?? "";
+          badge.classList.remove("text-gradient");
         }
       });
       const label = document.querySelector<HTMLElement>("[data-progress-label]");
       const total = rows.length;
       const enrolled = localStorage.getItem(enrollKey) === "1";
       const completed =
-        localStorage.getItem(`course:${courseSlug}:completed`) === "1" ||
+        localStorage.getItem(completedKey) === "1" ||
         (total > 0 && done.length >= total);
       const btn = document.querySelector<HTMLElement>("[data-enroll]");
       if (btn) {
@@ -184,13 +198,15 @@ const courseSchema = {
           btn.classList.add("btn-complete");
         } else {
           btn.textContent = enrolled ? "Continue course" : "Start course";
+          btn.classList.remove("btn-complete");
+          btn.classList.add("btn-primary");
         }
       }
       if (label) {
+        label.classList.remove("text-complete");
         if (completed) {
           label.textContent = "✓ Course completed";
           label.classList.add("text-complete");
-          label.classList.remove("text-[var(--text-faint)]");
         } else if (done.length > 0) {
           label.textContent = `${done.length} of ${total} lessons done`;
         } else if (enrolled) {
@@ -199,12 +215,26 @@ const courseSchema = {
           label.textContent = "Free · no signup, progress saves on this device";
         }
       }
+      const reset = document.querySelector<HTMLElement>("[data-reset]");
+      if (reset) {
+        const hasProgress = enrolled || completed || done.length > 0;
+        reset.classList.toggle("hidden", !hasProgress);
+      }
     };
 
     document.querySelector<HTMLElement>("[data-enroll]")?.addEventListener("click", () => {
+      // If already completed, the button is a review link; otherwise it enrolls.
       localStorage.setItem(enrollKey, "1");
       const first = document.querySelector<HTMLAnchorElement>("[data-lesson-slug]");
       if (first) window.location.href = first.href;
+    });
+
+    document.querySelector<HTMLElement>("[data-reset]")?.addEventListener("click", () => {
+      if (!confirm("Reset your progress for this course? This clears your completed and done marks on this device.")) return;
+      localStorage.removeItem(enrollKey);
+      localStorage.removeItem(doneKey);
+      localStorage.removeItem(completedKey);
+      paint();
     });
 
     paint();
