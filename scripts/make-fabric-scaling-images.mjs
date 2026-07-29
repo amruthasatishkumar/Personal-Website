@@ -122,16 +122,16 @@ await render(
 
 await render(
   "approach-4-activator.png",
-  "Approach 4  .  Fabric-native with Activator",
-  "Trigger scaling from inside Fabric, once you have a signal.",
+  "Approach 4  .  Fabric-native reactive scaling",
+  "React to real utilization, without leaving Fabric.",
   [
-    { title: "A trigger you control", sub: "No native capacity utilization event yet", color: cyan },
-    { title: "Activator rule", sub: "Fires on the event or threshold", color: violet },
+    { title: "Fabric capacity overview events", sub: "Summary event every 30s, with utilization", color: cyan },
+    { title: "Activator rule", sub: "Fires when your threshold is crossed", color: violet },
     { title: "Notebook, Pipeline, or UDF", sub: "The hands that call the API", color: indigo },
     { title: "Azure REST API", sub: "resize, suspend, or resume", color: violet },
     { title: "Fabric capacity", sub: "Scaled without leaving Fabric", color: purple },
   ],
-  "Activator supplies the action; a supported real-time utilization signal is the missing piece."
+  "Reactive and Fabric-native, on a best-effort 30 second event cadence."
 );
 
 console.log("Done. Images in", outDir);
