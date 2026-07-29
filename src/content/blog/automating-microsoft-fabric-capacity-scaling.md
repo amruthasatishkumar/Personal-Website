@@ -12,11 +12,13 @@ draft: false
 
 ## Fabric will not autoscale your capacity for you
 
-When you move to a Fabric F SKU, you get a lot of good things. What you do not get is the one thing people assume comes with the word "capacity" in the cloud: automatic scaling based on load. There is no rule you flip on that resizes your capacity when it gets busy and shrinks it when it goes quiet, the way a virtual machine scale set does.
+Teams that move to Microsoft Fabric tend to fall for it fast. One copy of the data in OneLake, every workload in one place, and a single capacity powering all of it. It feels like the platform just handles things, and for the most part it does.
 
-That matters because Fabric capacity is billed by size, per hour. An F64 sitting idle overnight and all weekend costs the same per hour as an F64 running a heavy refresh. If your usage has any shape to it at all, business hours versus nights, weekdays versus weekends, month-end spikes, then a capacity that never changes size is a capacity you are overpaying for.
+Then you watch it for a week. Monday morning the dashboards light up and the refreshes pile in, and the capacity is working hard. Tuesday at 2am it is doing almost nothing. The weekend goes quiet. Month-end spikes. Real usage has a shape, it breathes in and out across the day and the week.
 
-The good news is that every lever you need is exposed through the Azure REST API, and you can wire your own automation around it. This post walks through four ways to do that, from a five-minute no-code schedule to a fully Fabric-native setup, with the actual API calls and the trade-offs of each.
+Here is the catch: your capacity does not breathe with it. A Fabric F SKU is billed by size, per hour, and it stays exactly one size until you change it. An F64 sitting idle overnight and all weekend costs the same per hour as an F64 running a heavy refresh. The one thing people assume comes with the word "capacity" in the cloud, scaling up when it is busy and down when it is quiet, is the one thing Fabric does not do for you on its own. There is no rule you flip that behaves like a virtual machine scale set.
+
+The good news is that every lever you need is exposed through the Azure REST API, so you can teach your capacity to breathe yourself. This post walks through four ways to do exactly that, from a five-minute no-code schedule to a fully Fabric-native, reactive setup, with the actual API calls and the trade-offs of each.
 
 ## What Fabric already handles for you
 
