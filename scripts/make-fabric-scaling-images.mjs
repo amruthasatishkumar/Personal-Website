@@ -108,31 +108,30 @@ await render(
 );
 
 await render(
-  "approach-3-metric.png",
-  "Approach 3  .  Metric-driven with Azure Monitor",
-  "React to real load instead of a fixed clock.",
+  "approach-3-function.png",
+  "Approach 3  .  Timer-triggered Azure Function",
+  "Scheduled scaling as code, for a few cents a month.",
   [
-    { title: "Fabric capacity metrics", sub: "Utilization signal", color: cyan },
-    { title: "Azure Monitor alert", sub: "Threshold rule on the metric", color: violet },
-    { title: "Action group", sub: "Runs a Logic App or Function", color: indigo },
-    { title: "Azure REST API", sub: "Scale up, then back down", color: violet },
-    { title: "Fabric capacity", sub: "Reacts to real load", color: purple },
+    { title: "Timer trigger", sub: "NCRONTAB schedule, e.g. 8am and 8pm", color: cyan },
+    { title: "Azure Function", sub: "C# or Python, calls ARM with its identity", color: violet },
+    { title: "Azure REST API", sub: "PATCH sku to resize, or suspend and resume", color: indigo },
+    { title: "Fabric capacity", sub: "Resized or paused on schedule", color: purple },
   ],
-  "Best when load is spiky and you want reaction, not a schedule."
+  "Best when you want schedule-based scaling as versioned code."
 );
 
 await render(
   "approach-4-activator.png",
   "Approach 4  .  Fabric-native with Activator",
-  "Detect and act without leaving Fabric.",
+  "Trigger scaling from inside Fabric, once you have a signal.",
   [
-    { title: "Capacity Metrics model or SQL query", sub: "Utilization signal, inside Fabric", color: cyan },
-    { title: "Activator rule", sub: "Detects the threshold crossing", color: violet },
+    { title: "A trigger you control", sub: "No native capacity utilization event yet", color: cyan },
+    { title: "Activator rule", sub: "Fires on the event or threshold", color: violet },
     { title: "Notebook, Pipeline, or UDF", sub: "The hands that call the API", color: indigo },
     { title: "Azure REST API", sub: "resize, suspend, or resume", color: violet },
     { title: "Fabric capacity", sub: "Scaled without leaving Fabric", color: purple },
   ],
-  "Signal is refresh or schedule based, so it suits sustained load more than instant spikes."
+  "Activator supplies the action; a supported real-time utilization signal is the missing piece."
 );
 
 console.log("Done. Images in", outDir);

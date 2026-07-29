@@ -1,6 +1,6 @@
 ---
 title: "Automating Microsoft Fabric Capacity Scaling: Four Ways to Do It"
-description: "A hands-on guide to automating Microsoft Fabric capacity scaling four ways: Logic Apps, Automation runbooks, Azure Monitor, and Fabric Activator."
+description: "A hands-on guide to automating Microsoft Fabric capacity scaling: Logic Apps, Automation runbooks, Azure Functions, and Fabric Activator."
 pubDate: 2026-07-29
 category: "Data"
 tags: ["Fabric", "Capacity", "Cost Optimization", "Automation", "Activator"]
@@ -105,39 +105,49 @@ Attach a schedule to the runbook and you have the same behavior as the Logic App
 
 **Best for:** teams whose operational tooling already lives in Azure Automation.
 
-## Approach 3: Metric-driven scaling with Azure Monitor
+## Approach 3: A timer-triggered Azure Function
 
-Schedules are simple, but they cannot react to a surprise. If your load is spiky rather than predictable, you want to scale on the actual signal instead of the clock.
+If you would rather express your scaling logic as code than in a Logic App designer, a timer-triggered Azure Function does the same scheduled job and costs almost nothing to run. It fits well when scaling is one small piece of a larger codebase you already deploy.
 
-![Approach 3: Fabric capacity metrics feed an Azure Monitor alert that runs a Logic App or Function to scale the capacity](/images/blog/automating-microsoft-fabric-capacity-scaling/approach-3-metric.png)
+![Approach 3: a timer-triggered Azure Function calls the Azure REST API to resize or pause the capacity on a schedule](/images/blog/automating-microsoft-fabric-capacity-scaling/approach-3-function.png)
 
-The pattern:
+The wiring:
 
-1. **Watch a utilization metric** on the capacity through Azure Monitor.
-2. **Define an alert rule** with a threshold, for example when utilization stays high for a sustained window.
-3. **Point the alert at an action group** that runs a Logic App or an Azure Function.
-4. **That action calls the same REST API** to scale up, and a second rule scales back down when utilization falls.
+1. **Create a Function with a timer trigger.** The schedule is an NCRONTAB expression, for example one Function that scales up at 8am and another that scales down at 8pm.
+2. **Turn on the Function's managed identity** and assign the custom role above to it, scoped to the capacity.
+3. **Call the REST API from code**, using the Azure SDK or a plain HTTP request to the resize, suspend, or resume endpoints.
 
-This reacts to real demand, which is exactly what you want for unpredictable load. The cost is more moving parts and the need to tune thresholds so you scale on genuine trends rather than flapping on every brief blip.
+```python
+import azure.functions as func
+import requests
+from azure.identity import DefaultAzureCredential
 
-**Best for:** spiky load where a fixed schedule would either overprovision or miss the peak.
+app = func.FunctionApp()
 
-## Approach 4: Fabric-native scaling with Activator
+@app.timer_trigger(schedule="0 0 20 * * 1-5", arg_name="timer")  # 8pm on weekdays
+def scale_down(timer: func.TimerRequest) -> None:
+    token = DefaultAzureCredential().get_token("https://management.azure.com/.default").token
+    base = f"https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Fabric/capacities/{name}"
+    requests.patch(
+        f"{base}?api-version=2023-11-01",
+        headers={"Authorization": f"Bearer {token}"},
+        json={"sku": {"name": "F16", "tier": "Fabric"}},
+    )
+```
 
-Here is the approach that keeps everything inside Fabric, and it is the most interesting one, with one honest caveat you need to understand up front.
+**Best for:** teams who prefer their scheduled scaling as versioned, testable code.
 
-The idea is to run a smaller capacity as your baseline and let **Activator**, Fabric's no-code event and rules engine, watch utilization and trigger a scale-up when it crosses a threshold. Activator can trigger a notebook, a pipeline, or a User Data Function directly, and that item makes the API call.
+## Approach 4: Fabric-native triggering with Activator
+
+The three approaches above are all scheduled. The obvious next question is whether you can scale reactively, when utilization actually climbs, and do it from inside Fabric. The honest answer today is a partial yes, and it is worth knowing exactly where the line falls.
+
+**Activator**, Fabric's no-code event and rules engine, can trigger a notebook, a pipeline, or a User Data Function directly, and that item can call the scaling API. So the action half of a reactive loop genuinely exists and stays inside Fabric.
 
 ![Approach 4: a utilization signal in Fabric drives an Activator rule that triggers a notebook, pipeline, or UDF to call the REST API](/images/blog/automating-microsoft-fabric-capacity-scaling/approach-4-activator.png)
 
-The caveat: Activator cannot natively watch capacity utilization. Fabric's built-in events today cover workspace item activity, not a "capacity hit 85 percent" signal. So the real work is getting utilization into a form Activator can watch. Two practical options:
+The missing half is the signal. Activator cannot watch capacity utilization directly, because Fabric's built-in events today cover workspace item activity, not a "capacity hit 85 percent" event. The place utilization actually lives, the Capacity Metrics app, refreshes on a 10 to 15 minute latency, and its semantic model is documented as not supported for use outside the app's own reports. So there is no clean, supported way to feed real-time CU utilization into an Activator rule right now.
 
-- Build an Activator rule on the **Capacity Metrics semantic model**, since a Power BI report or semantic model is a valid Activator source.
-- Land utilization data in a Warehouse or KQL table and use an Activator rule that evaluates a **scheduled SQL query** on it.
-
-Both are refresh or schedule based, so this reacts on the order of minutes, not milliseconds. That makes it a good fit for sustained load patterns and a poor fit for catching an instantaneous spike. Be honest with yourself about which you have.
-
-Once the signal is in place, Activator is the trigger and a Fabric item is the hands. A notebook doing the resize looks like this:
+What this means in practice: use Activator as the trigger when you already have a suitable event or a signal you legitimately control, such as a business event you publish yourself or a threshold on your own data that stands in as a proxy for load. The notebook it fires looks like this:
 
 ```python
 import requests
@@ -158,21 +168,27 @@ requests.patch(
 )
 ```
 
-The whole loop runs without leaving Fabric, which is a genuinely nice story for a shop that is all-in on the platform. Just size your expectations to the latency of the signal.
+The whole action runs without leaving Fabric, which is a genuinely nice story for a shop that is all-in on the platform.
 
-**Best for:** Fabric-centric teams that want the automation to live in the platform, on load patterns that build over minutes rather than seconds.
+**Best for:** Fabric-centric teams that want the scaling action to live in the platform and already have a trigger to hang it on.
+
+## What about true reactive autoscale?
+
+It is worth saying plainly, because it is easy to assume otherwise: Fabric does not yet offer turnkey, utilization-driven autoscaling of a capacity. You might reach for Azure Monitor the way you would to autoscale a virtual machine, but Fabric capacity does not publish utilization as an Azure Monitor metric, and the Capacity Metrics app that does hold utilization explicitly does not support alerts. Microsoft points you to Real-Time hub for alerting, and Real-Time hub does not yet carry a capacity-utilization event.
+
+So the reliable levers today are scheduled scaling and pause and resume, plus **Autoscale Billing for Spark** when the pressure is specifically Spark. If your load is genuinely spiky, the pragmatic move is a schedule generous enough to cover your known peaks, and pausing or downsizing hard during the windows you know are quiet.
 
 ## Choosing between them
 
-| Approach | Reacts to | Effort | Best fit |
+| Approach | Driven by | Effort | Best fit |
 | --- | --- | --- | --- |
 | Logic App schedule | The clock | Low | Predictable business-hours patterns |
 | Automation runbook | The clock | Low | Teams already in Azure Automation |
-| Azure Monitor | Real load | Medium | Spiky, unpredictable demand |
-| Fabric Activator | Real load, minute-scale | Medium | Fabric-native shops, sustained load |
+| Azure Function timer | The clock | Low | Scheduled scaling as code |
+| Fabric Activator | A trigger you supply | Medium | Fabric-native action, if you have a signal |
 | Autoscale Billing for Spark | Spark demand | Low | Bursty Spark jobs specifically |
 
-A reasonable default: start by pausing dev and test capacities off-hours, since that is the largest and easiest saving. Put a scheduled resize on predictable production capacities. Reserve the metric-driven and Activator approaches for the workloads that genuinely spike, and reach for Autoscale Billing for Spark when the spikes are Spark jobs rather than the capacity as a whole.
+A reasonable default: start by pausing dev and test capacities off-hours, since that is the largest and easiest saving. Put a scheduled resize, via a Logic App, a runbook, or a Function, on predictable production capacities. Reach for Autoscale Billing for Spark when the pressure is Spark jobs rather than the capacity as a whole, and use the Activator pattern when you have a legitimate trigger and want the action to stay inside Fabric.
 
 ## Gotchas worth knowing before you ship
 
@@ -181,7 +197,7 @@ A reasonable default: start by pausing dev and test capacities off-hours, since 
 - **Below F64 changes who can read your reports.** F64 is the threshold at which free users with a viewer role can consume Power BI content. Scale below it and those users may be prompted to upgrade, so schedule the small size for hours when they are not working.
 - **Pausing bills your smoothed overage.** When you pause, any remaining smoothed and burst usage is summed and added to your bill. Pausing also instantly ends throttling, which makes it a useful emergency lever, but content is unavailable until you resume.
 - **Prefer resize over workspace reassignment.** Reassigning a workspace to another capacity cancels its running jobs. Resizing in place does not.
-- **Mind the Activator signal latency.** It reacts on the cadence of your metrics refresh or scheduled query, not in real time.
+- **There is no native utilization trigger yet.** Fabric capacity does not publish Azure Monitor metrics, and the Capacity Metrics app does not support alerts, so reactive autoscaling is not turnkey today. Plan around scheduled scaling.
 
 ## Where this leaves you
 
@@ -197,4 +213,5 @@ This post is based on Microsoft's public documentation:
 - [Pause and resume your Fabric capacity](https://learn.microsoft.com/en-us/fabric/enterprise/pause-resume) (Microsoft Learn)
 - [Autoscale Billing for Spark in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/autoscale-billing-for-spark-overview) (Microsoft Learn)
 - [What is Fabric Activator?](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/data-activator/activator-introduction) (Microsoft Learn)
+- [What is the Microsoft Fabric Capacity Metrics app?](https://learn.microsoft.com/en-us/fabric/enterprise/metrics-app) (Microsoft Learn)
 - [Fabric Capacities REST API: Update, Suspend, Resume](https://learn.microsoft.com/en-us/rest/api/microsoftfabric/fabric-capacities/update) (Microsoft Learn)
