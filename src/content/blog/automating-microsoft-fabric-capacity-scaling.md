@@ -18,13 +18,13 @@ That matters because Fabric capacity is billed by size, per hour. An F64 sitting
 
 The good news is that every lever you need is exposed through the Azure REST API, and you can wire your own automation around it. This post walks through four ways to do that, from a five-minute no-code schedule to a fully Fabric-native setup, with the actual API calls and the trade-offs of each.
 
-## First, what Fabric already does automatically
+## What Fabric already handles for you
 
-Before you build anything, know what you do not have to build. Fabric already smooths and bursts your usage under the hood, so short spikes do not require a bigger SKU. It spreads bursts of demand across time so a brief peak borrows against quieter periods rather than failing or forcing you to size up.
+Fabric does a surprising amount out of the box, and it pays to know that before you automate anything. Under the hood it smooths and bursts your usage, spreading short spikes across quieter periods so a brief peak rides through without a bigger SKU. For plenty of workloads, that alone absorbs the variability you were worried about.
 
-There is also **Autoscale Billing for Spark**, which is worth calling out because it solves a specific version of this problem without any scaling automation at all. When you enable it on a capacity, Spark jobs are offloaded to a serverless, pay-as-you-go pool and no longer consume your capacity's compute units. You set a maximum CU limit, and you are billed only for the Spark runtime you actually use. It does not burst from or fall back to your capacity, it is a separate model you opt into per capacity.
+There is also **Autoscale Billing for Spark**, a genuinely elegant option for Spark-heavy work. Enable it on a capacity and Spark jobs run on a serverless, pay-as-you-go pool instead of consuming your capacity's compute units. You set a maximum CU limit and pay only for the Spark runtime you use. It is a separate, opt-in model per capacity, so the rest of your capacity keeps humming along untouched.
 
-The practical takeaway: if your scaling pain is really "bursty Spark jobs," reach for Autoscale Billing for Spark first. If your pain is "the whole capacity is oversized for large parts of the week," then you want the scaling automation below.
+That already gives you two strong starting points: let smoothing and bursting handle the small stuff, and turn on Autoscale Billing for Spark when Spark is the pressure. The approaches below add scheduled scaling on top, for when the whole capacity is simply larger than it needs to be for big stretches of the week.
 
 ## The two levers you are actually pulling
 
@@ -172,11 +172,11 @@ The whole action runs without leaving Fabric, which is a genuinely nice story fo
 
 **Best for:** Fabric-centric teams that want the scaling action to live in the platform and already have a trigger to hang it on.
 
-## What about true reactive autoscale?
+## Handling spiky load today
 
-It is worth saying plainly, because it is easy to assume otherwise: Fabric does not yet offer turnkey, utilization-driven autoscaling of a capacity. You might reach for Azure Monitor the way you would to autoscale a virtual machine, but Fabric capacity does not publish utilization as an Azure Monitor metric, and the Capacity Metrics app that does hold utilization explicitly does not support alerts. Microsoft points you to Real-Time hub for alerting, and Real-Time hub does not yet carry a capacity-utilization event.
+For genuinely variable load, the pragmatic playbook is a schedule generous enough to cover your known peaks, aggressive pausing or downsizing in the quiet windows, and Autoscale Billing for Spark when the pressure is Spark. That combination gets you most of the savings that a reactive autoscaler would, with tooling that is stable and supported right now.
 
-So the reliable levers today are scheduled scaling and pause and resume, plus **Autoscale Billing for Spark** when the pressure is specifically Spark. If your load is genuinely spiky, the pragmatic move is a schedule generous enough to cover your known peaks, and pausing or downsizing hard during the windows you know are quiet.
+It is worth setting expectations on the fully reactive version, since it is easy to assume it already exists. Native, utilization-driven autoscaling of a capacity is not turnkey yet: Fabric capacity does not surface as an Azure Monitor metric, and the Capacity Metrics app that holds utilization does not raise alerts. Microsoft points to Real-Time hub for alerting, and a capacity-utilization event is not there yet. So scheduled scaling stays the reliable lever, and Activator is ready to be the action the day a suitable trigger lands.
 
 ## Choosing between them
 
